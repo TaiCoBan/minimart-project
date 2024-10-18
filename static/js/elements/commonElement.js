@@ -1,23 +1,6 @@
 
 
 // Header
-const topHeader = `
-    <div class="top-header">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-7 col-sm-6 hidden-xs">
-                    <p class="top-text">Minimart</p>
-                </div>
-                <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12">
-                    <ul>
-                        <li>+012 345 6789</li>
-                        <li>ldtt@tkw.com</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-`
 const logo = `
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-8">
         <div class="logo">
@@ -56,13 +39,13 @@ const navigation = `
                     <!-- navigations-->
                     <div id="navigation">
                         <ul>
-                            <li class="active"><a href="index.html">Trang chủ</a></li>
-                            <li><a href="product-list.html">Điện thoại</a>
+                            <li class="active"><a href="">Trang chủ</a></li>
+                            <li><a href="">Sản phẩm</a>
                             </li>
-                            <li><a href="about.html">Thông tin</a>
+                            <li><a href="">Thông tin</a>
                             </li>
-                            <li><a href="blog-default.html">Bài viết</a> </li>
-                            <li><a href="contact-us.html">Liên hệ</a>
+                            <li><a href="">Bài viết</a> </li>
+                            <li><a href="">Liên hệ</a>
                             </li>
                         </ul>
                     </div>
@@ -84,38 +67,16 @@ const headerWrapper = `
     </div>
 `
 export const header = `
-    ${topHeader}
     ${headerWrapper}
 `
 
 // Footer
-const tinyFooter = `
-    <div class="tiny-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <p class="aligncenter">Copyright © All Rights Reserved 2024 Template Design by
-                        <a href="#" target="_blank" class="copyrightlink">IT3</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-`
 const footerSocialLink = `
     <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-12">
         <div class="footer-widget">
             <h3 class="footer-title">Liên lạc với chúng tôi</h3>
             <div class="ft-social">
                 <span><a href="#" class="btn-social btn-facebook"><i class="fa fa-facebook"></i></a></span>
-                <span><a href="#" class="btn-social btn-twitter"><i class="fa fa-twitter"></i></a></span>
-                <span><a href="#" class="btn-social btn-googleplus"><i
-                            class="fa fa-google-plus"></i></a></span>
-                <span><a href="#" class=" btn-social btn-linkedin"><i class="fa fa-linkedin"></i></a></span>
-                <span><a href="#" class=" btn-social btn-pinterest"><i
-                            class="fa fa-pinterest-p"></i></a></span>
-                <span><a href="#" class=" btn-social btn-instagram"><i
-                            class="fa fa-instagram"></i></a></span>
             </div>
         </div>
     </div>
@@ -176,44 +137,37 @@ export const footer = `
                 ${footerSocialLink}
             </div>
         </div>
-        ${tinyFooter}
     </div>
 `
-
-// Page header in profile
-export const pageHeader = `
-    <div class="page-header">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="page-breadcrumb">
-                        <ol class="breadcrumb">
-                            <li><a href="#">Trang chủ</a></li>
-                            <li>Thông tin tài khoản</li>
-                        </ol>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-`
-
 
 // Sidebar
 const sideBarContent = `
     <div class="side-bar-content">
         <ul>
-            <a href=""><li class="slide-bar active"><i class="fa fa-edit"></i><span>Thông tin tài khoản</span></li></a>
-            <a href="profile-receipt.html"><li class="slide-bar"><i class="fas fa-money-check"></i><span>Quản lý đơn hàng</span></li></a>
-            <!-- <a href="address-deliver.html"><li class="slide-bar"><i class="fas fa-map-marker-alt"></i><span> Địa chỉ nhận hàng</span></li></a> -->
-            <a href="profile-reset-password.html"> <li class="slide-bar"><i class="fas fa-lock"></i><span> Đổi mật khẩu</span></li></a>
+            <a href="">
+                <li class="slide-bar active">
+                    <i class="fa fa-edit"></i>
+                    <span>Thông tin tài khoản</span>
+                </li>
+            </a>
+            <a href="">
+                <li class="slide-bar">
+                    <i class="fas fa-money-check"></i>
+                    <span>Quản lý đơn hàng</span>
+                </li>
+            </a>
+            <a href="#">
+                <li class="slide-bar">
+                    <i class="fas fa-lock"></i>
+                    <span> Đổi mật khẩu</span>
+                </li
+            </a>
         </ul>
     </div>
 `
 const userInfo = `
     <div class="user-infor">
-        <img src="" alt="">
+        <img src="../static/image/logo.png" alt="">
         <span>NGUYEN DU KHANH</span>
     </div>
 `
@@ -225,6 +179,5 @@ export const sideBar = `
 `
 
     document.getElementById('header').innerHTML = header;
-    document.getElementById('page-header').innerHTML = pageHeader;
     document.getElementById('footer').innerHTML = footer;
 
