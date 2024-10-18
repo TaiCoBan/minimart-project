@@ -1,0 +1,30 @@
+/* Top Header*/
+.top-header {
+    background-color: #e9edf0;
+}
+
+.top-header ul {
+}
+
+/* .top-header ul li {
+    float: left;
+    padding: 0px 22px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #848687;
+} */
+/* .top-header ul li {
+    float: left;
+    padding: 0px 14px;
+  } */
+  .top-header ul li {
+    float: left;
+    padding: 0px 14px;
+    display: inline;
+    color: #848687;
+  }
+  .top-text {
+    font-size: 14px;
+    color: #848687;
+    margin-bottom: 0px;
+  }
