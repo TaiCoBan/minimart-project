@@ -44,7 +44,6 @@ const navigation = `
                             </li>
                             <li><a href="">Thông tin</a>
                             </li>
-                            <li><a href="">Bài viết</a> </li>
                             <li><a href="">Liên hệ</a>
                             </li>
                         </ul>
@@ -99,11 +98,10 @@ const footerUsefulLinks = `
     <div class="footer-widget">
         <h3 class="footer-title">Tiện ích</h3>
         <ul class="arrow">
-            <li><a href="index.html">Home </a></li>
-            <li><a href="product-list.html">Mobie</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="blog-default.html">Blog</a></li>
-            <li><a href="contact-us.html">Contact</a></li>
+            <li><a href="#">Trang chủ </a></li>
+            <li><a href="#">Sản phẩm</a></li>
+            <li><a href="#">Thông tin</a></li>
+            <li><a href="#">Liên hệ</a></li>
         </ul>
     </div>
 </div>
