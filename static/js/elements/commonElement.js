@@ -6,11 +6,11 @@ const topHeader = `
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-7 col-sm-6 hidden-xs">
-                    <p class="top-text">Flexible Delivery, Fast Delivery.</p>
+                    <p class="top-text">Minimart</p>
                 </div>
                 <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12">
                     <ul>
-                        <li>123 456 7890</li>
+                        <li>+012 345 6789</li>
                         <li>ldtt@tkw.com</li>
                     </ul>
                 </div>
@@ -28,7 +28,7 @@ const logo = `
 const search = `
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <div class="search-bg">
-            <input type="text" class="form-control" placeholder="Search Here">
+            <input type="text" class="form-control" placeholder="Tìm kiếm">
             <button type="Submit"><i class="fa fa-search"></i></button>
         </div>
     </div>
@@ -62,7 +62,7 @@ const navigation = `
                             <li><a href="about.html">Thông tin</a>
                             </li>
                             <li><a href="blog-default.html">Bài viết</a> </li>
-                            <li><a href="contact-us.html">Liên hệ, hỗ trợ</a>
+                            <li><a href="contact-us.html">Liên hệ</a>
                             </li>
                         </ul>
                     </div>
@@ -94,16 +94,8 @@ const tinyFooter = `
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="payment-method alignleft">
-                        <ul>
-                            <li><a href="#"><i class="fa fa-cc-paypal fa-2x"></i></a></li>
-                            <li><a href="#"><i class="fa fa-cc-mastercard  fa-2x"></i></a></li>
-                            <li><a href="#"><i class="fa fa-cc-visa fa-2x"></i></a></li>
-                            <li><a href="#"><i class="fa fa-cc-discover fa-2x"></i></a></li>
-                        </ul>
-                    </div>
-                    <p class="alignright">Copyright © All Rights Reserved 2024 Template Design by
-                        <a href="#" target="_blank" class="copyrightlink">TKWeb</a>
+                    <p class="aligncenter">Copyright © All Rights Reserved 2024 Template Design by
+                        <a href="#" target="_blank" class="copyrightlink">IT3</a>
                     </p>
                 </div>
             </div>
@@ -161,16 +153,15 @@ const footerContactLinks = `
             <h3 class="footer-title">Thông tin hỗ trợ</h3>
             <div class="contact-info">
                 <span class="contact-icon"><i class="fa fa-map-marker"></i></span>
-                <span class="contact-text">Phường Linh Trung, Thủ Đức<br>Thành phố Hồ Chí Minh, Việt Nam -
-                    1955</span>
+                <span class="contact-text">Hà Nội</span>
             </div>
             <div class="contact-info">
                 <span class="contact-icon"><i class="fa fa-phone"></i></span>
-                <span class="contact-text">+084-123-4567 / 89</span>
+                <span class="contact-text">+012 345 6789</span>
             </div>
             <div class="contact-info">
                 <span class="contact-icon"><i class="fa fa-envelope"></i></span>
-                <span class="contact-text">nhom21@ltweb.com</span>
+                <span class="contact-text">ldtt@tkw.com</span>
             </div>
         </div>
     </div>
