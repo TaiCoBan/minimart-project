@@ -11,7 +11,7 @@ const topHeader = `
                 <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12">
                     <ul>
                         <li>123 456 7890</li>
-                        <li>nhom21@laptrinhweb.com</li>
+                        <li>ldtt@tkw.com</li>
                     </ul>
                 </div>
             </div>
@@ -21,7 +21,7 @@ const topHeader = `
 const logo = `
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-8">
         <div class="logo">
-            <a href="index.html"><img src="../static/image/logo.png" alt=""> </a>
+            <a href="index.html"><img src="../static/image/logo3.png" alt=""> </a>
         </div>
     </div>
 `
@@ -102,8 +102,8 @@ const tinyFooter = `
                             <li><a href="#"><i class="fa fa-cc-discover fa-2x"></i></a></li>
                         </ul>
                     </div>
-                    <p class="alignright">Copyright © All Rights Reserved 2020 Template Design by
-                        <a href="https://easetemplate.com/" target="_blank" class="copyrightlink">Nhom 21</a>
+                    <p class="alignright">Copyright © All Rights Reserved 2024 Template Design by
+                        <a href="#" target="_blank" class="copyrightlink">TKWeb</a>
                     </p>
                 </div>
             </div>

@@ -1,4 +1,5 @@
 import { sideBar } from "./CommonElement.js"
+
 // Main content
 const mainContent = `
     <div class="right-container">
