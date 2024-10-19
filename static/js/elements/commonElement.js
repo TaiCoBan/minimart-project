@@ -39,12 +39,12 @@ const navigation = `
                     <!-- navigations-->
                     <div id="navigation">
                         <ul>
-                            <li class="active"><a href="">Trang chủ</a></li>
-                            <li><a href="">Sản phẩm</a>
+                            <li class="active"><a href="index.html">Trang chủ</a></li>
+                            <li><a href="product-list.html">Sản phẩm</a>
                             </li>
-                            <li><a href="">Thông tin</a>
+                            <li><a href="#">Thông tin</a>
                             </li>
-                            <li><a href="">Liên hệ</a>
+                            <li><a href="#">Liên hệ</a>
                             </li>
                         </ul>
                     </div>
@@ -138,44 +138,5 @@ export const footer = `
     </div>
 `
 
-// Sidebar
-const sideBarContent = `
-    <div class="side-bar-content">
-        <ul>
-            <a href="">
-                <li class="slide-bar active">
-                    <i class="fa fa-edit"></i>
-                    <span>Thông tin tài khoản</span>
-                </li>
-            </a>
-            <a href="">
-                <li class="slide-bar">
-                    <i class="fas fa-money-check"></i>
-                    <span>Quản lý đơn hàng</span>
-                </li>
-            </a>
-            <a href="#">
-                <li class="slide-bar">
-                    <i class="fas fa-lock"></i>
-                    <span> Đổi mật khẩu</span>
-                </li
-            </a>
-        </ul>
-    </div>
-`
-const userInfo = `
-    <div class="user-infor">
-        <img src="../static/image/logo.png" alt="">
-        <span>NGUYEN DU KHANH</span>
-    </div>
-`
-export const sideBar = `
-    <div class="left-container">
-        ${userInfo}
-        ${sideBarContent}
-    </div>
-`
-
-    document.getElementById('header').innerHTML = header;
-    document.getElementById('footer').innerHTML = footer;
-
+document.getElementById('header').innerHTML = header;
+document.getElementById('footer').innerHTML = footer;
