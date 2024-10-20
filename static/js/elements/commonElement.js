@@ -137,6 +137,3 @@ export const footer = `
         </div>
     </div>
 `
-
-document.getElementById('header').innerHTML = header;
-document.getElementById('footer').innerHTML = footer;

@@ -1,4 +1,6 @@
 import { bills } from "../data/data.js"
+import { header, footer } from "./CommonElement.js"
+
 const userInfo = `
     <div>
         <p>NGUYEN DU KHANH</p>
@@ -65,4 +67,14 @@ const mainContent = `
     </div>
 `
 
-document.getElementById('main-content').innerHTML = mainContent
+const wholePage = `
+    ${header}
+    <div class="wrapper">
+        <div class="contentt">
+            ${mainContent}
+        </div>
+        ${footer}
+    </div>
+`
+
+document.getElementById('whole-page').innerHTML = wholePage
