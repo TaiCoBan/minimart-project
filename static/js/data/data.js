@@ -12,10 +12,5 @@ export let bills = [
     new Bill('DH02', users[1], [new ProductItem('test', 99, 1)]),
     new Bill('DH03', users[0], [new ProductItem('test', 99, 1)]),
     new Bill('DH04', users[1], [new ProductItem('test', 99, 1)]),
-    new Bill('DH04', users[1], [new ProductItem('test', 99, 1)]),
-    new Bill('DH04', users[1], [new ProductItem('test', 99, 1)]),
-    new Bill('DH04', users[1], [new ProductItem('test', 99, 1)]),
-    new Bill('DH04', users[1], [new ProductItem('test', 99, 1)]),
-    new Bill('DH04', users[1], [new ProductItem('test', 99, 1)]),
-    new Bill('DH04', users[1], [new ProductItem('test', 99, 1)])
+    new Bill('DH05', users[1], [new ProductItem('test', 99, 1)])
 ];

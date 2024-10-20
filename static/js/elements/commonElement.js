@@ -20,7 +20,7 @@ const account = `
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
         <div class="account-section">
             <ul>
-                <li><a href="account.html" class="title hidden-xs">Tài khoản</a></li>
+                <li><a href="profile-receipt.html" class="title hidden-xs">Tài khoản</a></li>
                 <li class="hidden-xs">|</li>
                 <li><a href="login-form.html" class="title hidden-xs">Đăng nhập</a></li>
                 <li><a href="favorite-list.html"><i class="fa fa-heart"></i></a></li>

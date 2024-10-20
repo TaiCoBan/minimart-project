@@ -6,7 +6,7 @@ export class User {
         // this.number = number
         // this.username = username
         // this.password = password
-        // this.role = role
+        // this.role = role // chu cua hang, khach hang
     }
 // , email, number, username, password, role
     getName() {
