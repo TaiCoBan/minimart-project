@@ -1,30 +1,5 @@
-export class User {
-    constructor(id, fullName, address, number, email, password, gender) {
-        this.id = id
-        this.fullName = fullName
-        this.address = address
-        this.email = email
-        this.number = number
-        this.password = password
-        this.role = 'USER' // chu cua hang, khach hang
-    }
-
-    getName() {
-        return this.fullName
-    }
-
-    getNumber() {
-        return this.number
-    }
-
-    getAddress() {
-        return this.address
-    }
-}
-
 export class Product {
-    constructor(id, name, price) {
-        this.id = id
+    constructor(name, price) {
         this.name = name
         this.price = price
     }
@@ -47,16 +22,26 @@ export class ProductItem {
 }
 
 export class Receipt {
-    constructor(id, user, productItems = []) {
+    constructor(id, cusName, number, address,  productItems = []) {
         this.id = id
-        this.user = user;
+        this.cusName = cusName;
+        this.number = number
+        this.address = address
         this.products = productItems;
         this.date = '01-01-2011';
         this.status = 0;
     }
 
-    getUser() {
-        return this.user
+    getCusName() {
+        return this.cusName
+    }
+
+    getNumber() {
+        return this.number
+    }
+
+    getAddress() {
+        return this.address
     }
 
     getProducts() {

@@ -1,12 +1,13 @@
 import { receipts } from "../data/data.js";
-import { headerWrapper, footer } from "./CommonElement.js"
+import { headerWrapper, footer } from "./CommonElement.js";
 
 const userInfo = `
     <div class="user-infor">
         <img src="../static/image/logo.png" alt="">
         <span>USER NAME</span>
     </div>
-`
+`;
+
 const sidebarContent = `
     <div class="side-bar-content">
         <ul>
@@ -15,72 +16,63 @@ const sidebarContent = `
             <a href="#" id="reset"> <li><i class="fas fa-lock"></i><span> Đổi mật khẩu</span></li></a>
         </ul>
     </div>
-`
+`;
 
 const leftContainer = `
     <div class="left-container">
         ${sidebarContent}
     </div>
-`
+`;
 
 const accountInfo = `
     <h3 class="title-content">Thông tin tài khoản</h3>
     <div class="account-infor">
         <form action="">
             <div class="form-control">
-                <label for="" class="input-label">
-                    Họ & tên
-                </label>
+                <label class="input-label">Họ & tên</label>
                 <input type="text" placeholder="Thêm họ tên" class="input-field">
             </div>
             <div class="form-control">
-                <label for="" class="input-label">
-                    Email
-                </label>
+                <label class="input-label">Email</label>
                 <input type="email" placeholder="Thêm email" class="input-field">
             </div>
-            
             <div class="form-control">
-                <label for="" class="input-label">
-                    Số điện thoại
-                </label>
+                <label class="input-label">Số điện thoại</label>
                 <input type="phone" placeholder="Thêm số điện thoại" class="input-field">
             </div>
             <div class="form-control">
-                <label for="" class="input-label">
-                    Địa chỉ giao hàng
-                </label>
+                <label class="input-label">Địa chỉ giao hàng</label>
                 <input type="phone" placeholder="Địa chỉ" class="input-field">
             </div>
             <button class="btn-update">Cập nhật</button>
         </form>
     </div>
-`
+`;
+
 const resetPasswordInfo = `
     <h3 class="title-content">Đổi mật khẩu</h3>
-        <div class="reset-password-content">
-            <form action="">
-                <div class="form-control">
-                    <label for="" class="input-label">Mật khẩu hiện tại</label>
-                    <input type="password" class="input-field" id="input">
-                </div>
-                <div class="form-control">
-                    <label for="" class="input-label">Mật khẩu mới</label>
-                    <input type="password" class="input-field">
-                </div>
-                <div class="form-control">
-                    <label for="" class="input-label">Nhập lại mật khẩu</label>
-                    <input type="password" class="input-field">
-                </div>
-                <button class="btn-update-password">Đổi mật khẩu</button>
-            </form>
-        </div>
-`
+    <div class="reset-password-content">
+        <form action="">
+            <div class="form-control">
+                <label class="input-label">Mật khẩu hiện tại</label>
+                <input type="password" class="input-field" id="input">
+            </div>
+            <div class="form-control">
+                <label class="input-label">Mật khẩu mới</label>
+                <input type="password" class="input-field">
+            </div>
+            <div class="form-control">
+                <label class="input-label">Nhập lại mật khẩu</label>
+                <input type="password" class="input-field">
+            </div>
+            <button class="btn-update-password">Đổi mật khẩu</button>
+        </form>
+    </div>
+`;
 
 const receiptInfo = `
     <h3 class="title-content">Đơn hàng</h3>
     <div class="receipt-infor">
-        
         <table class="table table-hover">
             <thead class="thead-light">
                 <tr>
@@ -88,21 +80,21 @@ const receiptInfo = `
                 <th scope="col">Tên khách hàng</th>
                 <th scope="col">Ngày đặt hàng</th>
                 <th scope="col">Chi tiết đơn hàng</th>
-                    <th scope="col">Tình trạng đơn hàng</th>
+                <th scope="col">Tình trạng đơn hàng</th>
                 </tr>
             </thead>
             <tbody>
                 ${receiptInfoMap(receipts)}
             </tbody>
-            </table>
+        </table>
     </div>
-`
+`;
 
 function receiptInfoMap(receipts) {
     return receipts.map(receipt => `
         <tr>
             <td>${receipt.id}</td>
-            <td>${receipt.getUser().getName()}</td>
+            <td>${receipt.getCusName()}</td>
             <td>${receipt.date}</td>
             <td><a href="#" class="details" data-id="${receipt.id}">Xem chi tiết</a></td>
             <td>${receipt.status === 0 ? 'Chờ xử lý' : 'Đã hoàn thành'}</td>
@@ -116,16 +108,14 @@ function receiptDetailsMap(products) {
             <td>${product.name}</td>
             <td>${product.getPrice().toLocaleString('vi-VN')}đ</td>
             <td>${product.quantity}</td>
-            <td>${(product.getTotalPrice()).toLocaleString('vi-VN')}đ</td>
+            <td>${product.getTotalPrice().toLocaleString('vi-VN')}đ</td>
         </tr>
     `).join('');
 }
 
 function showReceiptDetails(orderId) {
-    // Tìm đơn hàng dựa trên mã đơn hàng (orderId)
     const receipt = receipts.find(r => r.id === orderId);
 
-    // Kiểm tra xem đơn hàng có tồn tại không
     if (receipt) {
         const receiptDetailsHTML = `
             <h3 class="title-content">Đơn hàng / Chi tiết đơn hàng</h3>
@@ -138,9 +128,9 @@ function showReceiptDetails(orderId) {
                     </div>
                     <div class="right-content content">
                         <h4>THÔNG TIN NHẬN HÀNG</h4>
-                        <p><strong>${receipt.getUser().getName()}</strong></p>
-                        <p><strong>${receipt.getUser().getNumber()}</p>
-                        <p class="address">${receipt.getUser().getAddress()}</p>
+                        <p><strong>${receipt.getCusName()}</strong></p>
+                        <p><strong>${receipt.getNumber()}</p>
+                        <p class="address">${receipt.getAddress()}</p>
                     </div>
                 </div>
                 <table class="table">
@@ -190,7 +180,6 @@ function showReceiptDetails(orderId) {
     }
 }
 
-// Sự kiện khi bấm vào "Xem chi tiết"
 document.addEventListener('click', function(event) {
     if (event.target.classList.contains('details')) {
         event.preventDefault();
@@ -203,7 +192,7 @@ const rightContainer = `
     <div class="right-container">
         <div id="main-content"></div>
     </div>
-`
+`;
 
 const content = `
     <div class="content">
@@ -216,7 +205,8 @@ const content = `
             </div>
         </div>
     </div>
-`
+`;
+
 const pageHeader = `
     <div class="page-header">
         <div class="container">
@@ -228,21 +218,20 @@ const pageHeader = `
                             <li>Thông tin tài khoản</li>
                         </ol>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
-`
+`;
 
 const wholePage = `
     ${headerWrapper}
     ${pageHeader}
     ${content}
     ${footer}
-`
+`;
 
-document.getElementById('whole-page').innerHTML = wholePage
+document.getElementById('whole-page').innerHTML = wholePage;
 
 let mainContent = document.getElementById('main-content');
 mainContent.innerHTML = accountInfo;
@@ -259,12 +248,6 @@ document.getElementById('reset').onclick = function() {
     mainContentHandler(3);
 };
 
-document.querySelectorAll('details').forEach(item => {
-    item.onclick = function() {
-        mainContentHandler(4);
-    };
-});
-
 function mainContentHandler(key) {
     if (key === 1) {
         mainContent.innerHTML = accountInfo;
@@ -272,10 +255,7 @@ function mainContentHandler(key) {
         mainContent.innerHTML = receiptInfo;
     } else if (key === 3) {
         mainContent.innerHTML = resetPasswordInfo;
-    } else if (key === 4) {
-        mainContent.innerHTML = receiptDetails;
     } else {
         mainContent.innerHTML = "Có lỗi xảy ra";
     }
 }
-
