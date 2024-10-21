@@ -102,7 +102,7 @@ function receiptInfoMap(receipts) {
     return receipts.map(receipt => `
         <tr>
             <td>${receipt.id}</td>
-            <td>${receipt.cusName}</td>
+            <td>${receipt.getUser().getName()}</td>
             <td>${receipt.date}</td>
             <td><a href="#" class="details" data-id="${receipt.id}">Xem chi tiết</a></td>
             <td>${receipt.status === 0 ? 'Chờ xử lý' : 'Đã hoàn thành'}</td>
