@@ -1,6 +1,21 @@
-
-
 // Header
+export const topHeader = `
+    <div class="top-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-7 col-sm-6 hidden-xs">
+                    <p class="top-text">Flexible Delivery, Delivery.</p>
+                </div>
+                <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12">
+                    <ul>
+                        <li>+084 123 4567</li>
+                        <li>ldtt@TKW.com</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+`
 const logo = `
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-8">
         <div class="logo">
@@ -11,16 +26,16 @@ const logo = `
 const search = `
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <div class="search-bg">
-            <input type="text" class="form-control" placeholder="Tìm kiếm">
+            <input type="text" class="form-control" placeholder="Search Here">
             <button type="Submit"><i class="fa fa-search"></i></button>
         </div>
     </div>
 `
-const account = `
+const subNav = `
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
         <div class="account-section">
             <ul>
-                <li><a href="profile-receipt.html" class="title hidden-xs">Tài khoản</a></li>
+                <li><a href="profile.html" class="title hidden-xs">Tài khoản</a></li>
                 <li class="hidden-xs">|</li>
                 <li><a href="login-form.html" class="title hidden-xs">Đăng nhập</a></li>
                 <li><a href="favorite-list.html"><i class="fa fa-heart"></i></a></li>
@@ -42,9 +57,10 @@ const navigation = `
                             <li class="active"><a href="index.html">Trang chủ</a></li>
                             <li><a href="product-list.html">Sản phẩm</a>
                             </li>
-                            <li><a href="#">Thông tin</a>
+                            <li><a href="about.html">Thông tin</a>
                             </li>
-                            <li><a href="#">Liên hệ</a>
+                            <li><a href="blog-default.html">Bài viết</a> </li>
+                            <li><a href="contact-us.html">Liên hệ</a>
                             </li>
                         </ul>
                     </div>
@@ -53,34 +69,55 @@ const navigation = `
         </div>
     </div>
 `
-const headerWrapper = `
-    <div class="header-wrapper">
-        <div class="container">
-            <div class="row">
-                ${logo}
-                ${search}
-                ${account}
-            </div>
+export const headerWrapper = `
+<div class="header-wrapper">
+    <div class="container">
+        <div class="row">
+            ${logo}
+            ${search}
+            ${subNav}
         </div>
-        ${navigation}
     </div>
-`
-export const header = `
-    ${headerWrapper}
+    ${navigation}
+</div>
 `
 
 // Footer
-const footerSocialLink = `
+const footerContactLinks = `
     <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-12">
         <div class="footer-widget">
-            <h3 class="footer-title">Liên lạc với chúng tôi</h3>
-            <div class="ft-social">
-                <span><a href="#" class="btn-social btn-facebook"><i class="fa fa-facebook"></i></a></span>
+            <h3 class="footer-title">Thông tin hỗ trợ</h3>
+            <div class="contact-info">
+                <span class="contact-icon"><i class="fa fa-map-marker"></i></span>
+                <span class="contact-text">Hà Nội</span>
+            </div>
+            <div class="contact-info">
+                <span class="contact-icon"><i class="fa fa-phone"></i></span>
+                <span class="contact-text">+084-123-4567 / 89</span>
+            </div>
+            <div class="contact-info">
+                <span class="contact-icon"><i class="fa fa-envelope"></i></span>
+                <span class="contact-text">ldtt@TKW.com</span>
             </div>
         </div>
     </div>
 `
-const FooterPolicyListLink = `
+
+const footerUsefulLinks = `
+    <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-12">
+        <div class="footer-widget">
+            <h3 class="footer-title">Tiện ích</h3>
+            <ul class="arrow">
+                <li><a href="index.html">Home </a></li>
+                <li><a href="product-list.html">Mobie</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="blog-default.html">Blog</a></li>
+                <li><a href="contact-us.html">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+`
+const footerPolicyLinks = `
     <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-12">
         <div class="footer-widget">
             <h3 class="footer-title">Chính sách</h3>
@@ -93,34 +130,41 @@ const FooterPolicyListLink = `
         </div>
     </div>
 `
-const footerUsefulLinks = `
-    <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-12">
-    <div class="footer-widget">
-        <h3 class="footer-title">Tiện ích</h3>
-        <ul class="arrow">
-            <li><a href="#">Trang chủ </a></li>
-            <li><a href="#">Sản phẩm</a></li>
-            <li><a href="#">Thông tin</a></li>
-            <li><a href="#">Liên hệ</a></li>
-        </ul>
-    </div>
-</div>
-`
-const footerContactLinks = `
+const footerSocialLinks = `
     <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-12">
         <div class="footer-widget">
-            <h3 class="footer-title">Thông tin hỗ trợ</h3>
-            <div class="contact-info">
-                <span class="contact-icon"><i class="fa fa-map-marker"></i></span>
-                <span class="contact-text">Hà Nội</span>
+            <h3 class="footer-title">Liên lạc với chúng tôi</h3>
+            <div class="ft-social">
+                <span><a href="#" class="btn-social btn-facebook"><i class="fa fa-facebook"></i></a></span>
+                <span><a href="#" class="btn-social btn-twitter"><i class="fa fa-twitter"></i></a></span>
+                <span><a href="#" class="btn-social btn-googleplus"><i
+                            class="fa fa-google-plus"></i></a></span>
+                <span><a href="#" class=" btn-social btn-linkedin"><i class="fa fa-linkedin"></i></a></span>
+                <span><a href="#" class=" btn-social btn-pinterest"><i
+                            class="fa fa-pinterest-p"></i></a></span>
+                <span><a href="#" class=" btn-social btn-instagram"><i
+                            class="fa fa-instagram"></i></a></span>
             </div>
-            <div class="contact-info">
-                <span class="contact-icon"><i class="fa fa-phone"></i></span>
-                <span class="contact-text">+012 345 6789</span>
-            </div>
-            <div class="contact-info">
-                <span class="contact-icon"><i class="fa fa-envelope"></i></span>
-                <span class="contact-text">ldtt@tkw.com</span>
+        </div>
+    </div>
+`
+const tinyFooter = `
+    <div class="tiny-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="payment-method alignleft">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-cc-paypal fa-2x"></i></a></li>
+                            <li><a href="#"><i class="fa fa-cc-mastercard  fa-2x"></i></a></li>
+                            <li><a href="#"><i class="fa fa-cc-visa fa-2x"></i></a></li>
+                            <li><a href="#"><i class="fa fa-cc-discover fa-2x"></i></a></li>
+                        </ul>
+                    </div>
+                    <p class="alignright">Copyright © All Rights Reserved 2020 Template Design by
+                        <a href="#/" target="_blank" class="copyrightlink">TKW</a>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
@@ -130,10 +174,11 @@ export const footer = `
         <div class="container">
             <div class="row">
                 ${footerContactLinks}
+                ${footerPolicyLinks}
                 ${footerUsefulLinks}
-                ${FooterPolicyListLink}
-                ${footerSocialLink}
+                ${footerSocialLinks}
             </div>
         </div>
+        ${tinyFooter}
     </div>
 `
