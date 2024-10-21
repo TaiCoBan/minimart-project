@@ -1,8 +1,9 @@
-import { header, footer } from "./CommonElement.js";
+import { topHeader, headerWrapper, footer } from "./CommonElement.js";
 
 const wholePage = `
 <!-- header-section-->
-    ${header}
+    ${topHeader}
+    ${headerWrapper}
     <div class="page-header">
         <div class="container">
             <div class="row">
