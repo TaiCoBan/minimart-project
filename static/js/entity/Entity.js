@@ -1,17 +1,24 @@
 export class User {
-    constructor(id, fullName, address) {
+    constructor(id, fullName, address, number, email, password, gender) {
         this.id = id
         this.fullName = fullName
         this.address = address
-        // this.email = email
-        // this.number = number
-        // this.username = username
-        // this.password = password
-        // this.role = role // chu cua hang, khach hang
+        this.email = email
+        this.number = number
+        this.password = password
+        this.role = 'USER' // chu cua hang, khach hang
     }
-// , email, number, username, password, role
+
     getName() {
         return this.fullName
+    }
+
+    getNumber() {
+        return this.number
+    }
+
+    getAddress() {
+        return this.address
     }
 }
 
@@ -29,25 +36,34 @@ export class ProductItem {
         this.price = price
         this.quantity = quantity
     }
+
     getPrice() {
+        return this.price
+    }
+
+    getTotalPrice() {
         return this.price * this.quantity
     }
 }
 
 export class Receipt {
-    constructor(id, User, productItems = []) {
+    constructor(id, user, productItems = []) {
         this.id = id
-        this.cusName = User.getName()
-        this.products = productItems
-        this.date = '01-01-2011'
-        this.status = 0
+        this.user = user;
+        this.products = productItems;
+        this.date = '01-01-2011';
+        this.status = 0;
+    }
+
+    getUser() {
+        return this.user
+    }
+
+    getProducts() {
+        return this.products;
     }
 
     totalPrice() {
-        let r = 0;
-        this.products.forEach(productItem => {
-            r += productItem.getPrice();
-        });
-        return r;
+        return this.products.reduce((total, productItem) => total + productItem.getPrice(), 0);
     }
 }

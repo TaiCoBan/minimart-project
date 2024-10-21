@@ -1,5 +1,5 @@
 import { receipts } from "../data/data.js";
-import {headerWrapper, footer } from "./CommonElement.js"
+import { headerWrapper, footer } from "./CommonElement.js"
 
 const userInfo = `
     <div class="user-infor">
@@ -19,41 +19,10 @@ const sidebarContent = `
 
 const leftContainer = `
     <div class="left-container">
-        ${userInfo}
         ${sidebarContent}
     </div>
 `
 
-const receiptInfoMap = receipts.map(receipt => `
-    <tr>
-        <th scope="row">${receipt.id}</th>
-        <td>${receipt.cusName}</td>
-        <td>${receipt.date}</td>
-        <td><a href="#" id="details">Xem chi tiết</a></td>
-        <td>${receipt.status === 0 ? 'Đang xử lí' : 'Hoàn thành'}</td>
-    </tr>
-`).join('');
-
-const receiptInfo = `
-    <h3 class="title-content">Đơn hàng</h3>
-        <div class="receipt-infor">
-            
-            <table class="table table-hover">
-                <thead class="thead-light">
-                    <tr>
-                    <th scope="col">Mã đơn hàng</th>
-                    <th scope="col">Tên khách hàng</th>
-                    <th scope="col">Ngày đặt hàng</th>
-                    <th scope="col">Chi tiết đơn hàng</th>
-                        <th scope="col">Tình trạng đơn hàng</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${receiptInfoMap}
-                </tbody>
-                </table>
-        </div>
-`
 const accountInfo = `
     <h3 class="title-content">Thông tin tài khoản</h3>
     <div class="account-infor">
@@ -83,17 +52,6 @@ const accountInfo = `
                 </label>
                 <input type="phone" placeholder="Địa chỉ" class="input-field">
             </div>
-            <div class="form-control">
-                <label for="" class="input-label">
-                    Giới tính
-                </label>
-
-                <input type="radio" name="gender" value="male" checked class="input-radio"> Nam
-                <input type="radio" name="gender" value="female" class="input-radio"> Nữ
-                <input type="radio" name="gender" value="other" class="input-radio"> Khác
-
-            </div>
-
             <button class="btn-update">Cập nhật</button>
         </form>
     </div>
@@ -118,107 +76,129 @@ const resetPasswordInfo = `
             </form>
         </div>
 `
-const receiptDetails = `
-    <h3 class="title-content">Đơn hàng đã đặt/ Chi tiết đơn hàng</h3>
-    <div class="receipt-infor-details">
-        <div class="title-receipt">
-            <div class="left-content content">
-                <h4>ĐƠN HÀNG</h4>
-                <p class="receipt-id">Mã đơn hàng: DH01</p>
-                <p class="receipt-time">Đặt hàng: 10/10/2021</p>
-            </div>
-            <p></p>
-            <div class="right-content content">
-                <h4>THÔNG TIN NHẬN HÀNG</h4>
-                <p><strong>NGUYỄN DU KHÁNH</strong> - 0364413771</p>
-                <p class="address">số nhà 82, đường 30, khu phố 6 - Phường Bình Chiểu - Thành phố
-                    Thủ Đức - Hồ Chí Minh</p>
-            </div>
-        </div>
-        <table class="table">
+
+const receiptInfo = `
+    <h3 class="title-content">Đơn hàng</h3>
+    <div class="receipt-infor">
+        
+        <table class="table table-hover">
             <thead class="thead-light">
                 <tr>
-                    <th>Sản phẩm</th>
-                    <th scope="col">Đơn giá</th>
-                    <th scope="col">Số lượng</th>
-                    <th scope="col">Thành tiền</th>
+                <th scope="col">Mã đơn hàng</th>
+                <th scope="col">Tên khách hàng</th>
+                <th scope="col">Ngày đặt hàng</th>
+                <th scope="col">Chi tiết đơn hàng</th>
+                    <th scope="col">Tình trạng đơn hàng</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>
-                        <div class="product-title">
-                            <img src="images/iPhone_13.jpg" alt="">
-                            <div>
-                                <p>iPhone 13 Pro 128GB</p>
-                                <p>Màu sắc: Đỏ</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td><div class="item-center">30.750.000đ</div></td>
-                    <td><div class="item-center">1</div></td>
-                    <td><div class="item-center">30.750.000đ</div></td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <div class="product-title">
-                            <img src="images/iphone11.png" alt="">
-                            <div>
-                                <p>iPhone 11 Pro 128GB</p>
-                                <p>Màu sắc: Xanh</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td><div class="item-center">17.000.000đ</div></td>
-                    <td><div class="item-center">1</div></td>
-                    <td><div class="item-center">17.000.000đ</div></td>
-                </tr>
-
+                ${receiptInfoMap(receipts)}
             </tbody>
-
-            <tfoot>
-                <tr>
-                    <td scope="row"></td>
-                    <td></td>
-                    <td scope="row">
-                        <div>
-                            <p>Tổng tiền:</p>
-                            <p>Phí vận chuyển:</p>
-                            <p>Tổng thanh toán:</p>
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            <p>47.750.000đ</p>
-                            <p>50.000đ</p>
-                            <p>47.800.000đ</p>
-                        </div>
-                    </td>
-                </tr>
-
-            </tfoot>
-        </table>
-        <a href="profile-receipt.html" class="redirect-to-receipt text-blue"><i class="fas fa-long-arrow-alt-left"></i> Danh sách đơn hàng</a>
+            </table>
     </div>
 `
-function createRecepitDetails(productItem) {
-    return `
+
+function receiptInfoMap(receipts) {
+    return receipts.map(receipt => `
         <tr>
-            <td>
-                <div class="product-title">
-                    <img src="" alt="">
-                    <div>
-                        <p>${productItem.name}</p>
+            <td>${receipt.id}</td>
+            <td>${receipt.cusName}</td>
+            <td>${receipt.date}</td>
+            <td><a href="#" class="details" data-id="${receipt.id}">Xem chi tiết</a></td>
+            <td>${receipt.status === 0 ? 'Chờ xử lý' : 'Đã hoàn thành'}</td>
+        </tr>
+    `).join('');
+}
+
+function receiptDetailsMap(products) {
+    return products.map(product => `
+        <tr>
+            <td>${product.name}</td>
+            <td>${product.getPrice().toLocaleString('vi-VN')}đ</td>
+            <td>${product.quantity}</td>
+            <td>${(product.getTotalPrice()).toLocaleString('vi-VN')}đ</td>
+        </tr>
+    `).join('');
+}
+
+function showReceiptDetails(orderId) {
+    // Tìm đơn hàng dựa trên mã đơn hàng (orderId)
+    const receipt = receipts.find(r => r.id === orderId);
+
+    // Kiểm tra xem đơn hàng có tồn tại không
+    if (receipt) {
+        const receiptDetailsHTML = `
+            <h3 class="title-content">Đơn hàng / Chi tiết đơn hàng</h3>
+            <div class="receipt-infor-details">
+                <div class="title-receipt">
+                    <div class="left-content content">
+                        <h4>ĐƠN HÀNG</h4>
+                        <p class="receipt-id">Mã đơn hàng: ${receipt.id}</p>
+                        <p class="receipt-time">Đặt hàng: ${receipt.date}</p>
+                    </div>
+                    <div class="right-content content">
+                        <h4>THÔNG TIN NHẬN HÀNG</h4>
+                        <p><strong>${receipt.getUser().getName()}</strong></p>
+                        <p><strong>${receipt.getUser().getNumber()}</p>
+                        <p class="address">${receipt.getUser().getAddress()}</p>
                     </div>
                 </div>
-            </td>
-            <td><div class="item-center">${productItem.price}</div></td>
-            <td><div class="item-center">${productItem.quantity}</div></td>
-            <td><div class="item-center">${productItem.price * productItem.quantity}</div></td>
-        </tr>
-    `
+                <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Sản phẩm</th>
+                            <th scope="col">Đơn giá</th>
+                            <th scope="col">Số lượng</th>
+                            <th scope="col">Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${receiptDetailsMap(receipt.products)}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td scope="row"></td>
+                            <td></td>
+                            <td scope="row">
+                                <div>
+                                    <p>Tổng tiền:</p>
+                                    <p>Phí vận chuyển:</p>
+                                    <p>Tổng thanh toán:</p>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <p>${receipt.totalPrice().toLocaleString('vi-VN')}đ</p>
+                                    <p>10.000đ</p>
+                                    <p>${(receipt.totalPrice() + 10000).toLocaleString('vi-VN')}đ</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <a id="back" class="redirect-to-receipt text-blue" style="cursor:pointer"><i class="fas fa-long-arrow-alt-left"></i> Danh sách đơn hàng</a>
+            </div>
+        `;
+
+        mainContent.innerHTML = receiptDetailsHTML;
+
+        document.getElementById('back').onclick = function() {
+            mainContentHandler(2);
+        };
+    } else {
+        mainContent.innerHTML = "Không tìm thấy đơn hàng.";
+    }
 }
+
+// Sự kiện khi bấm vào "Xem chi tiết"
+document.addEventListener('click', function(event) {
+    if (event.target.classList.contains('details')) {
+        event.preventDefault();
+        const orderId = event.target.getAttribute('data-id');
+        showReceiptDetails(orderId);
+    }
+});
+
 const rightContainer = `
     <div class="right-container">
         <div id="main-content"></div>
@@ -279,7 +259,7 @@ document.getElementById('reset').onclick = function() {
     mainContentHandler(3);
 };
 
-document.querySelectorAll('#details').forEach(item => {
+document.querySelectorAll('details').forEach(item => {
     item.onclick = function() {
         mainContentHandler(4);
     };

@@ -3537,12 +3537,16 @@ Class----------------
   font-weight: 300;
   margin-top: 20px;
 }
+
 .row-account .right-container .account-infor{
   height: 510px;
   width: 100%;
   background: white;
   border-radius: 5px;
   padding: 40px;
+}
+.account-infor form {
+  margin-left: 75px;
 }
 .row-account .right-container .account-infor form{
   /* margin: 0 auto; */

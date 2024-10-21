@@ -3,8 +3,8 @@ import { User } from "../entity/Entity.js";
 import { ProductItem, Product } from "../entity/Entity.js"
 
 export let users = [
-    new User(1, 'Khach hang 1', 'Hà Nội'),
-    new User(2, 'Khach hang 2', 'Bắc Ninh')
+    new User(1, 'Khach hang 1', 'Hà Nội', '1234567890', 'kh@gmail.com', 'kh'),
+    new User(2, 'admin', 'Bắc Ninh', '3415243453', 'admin@gmail.com', 'admin')
 ];
 
 export let products = [
@@ -21,9 +21,13 @@ export let products = [
 
 export let receipts = [
     new Receipt('DH01', users[0], [new ProductItem('test', 99, 1)]),
-    new Receipt('DH02', users[1], [new ProductItem('test', 99, 1)]),
+    new Receipt('DH02', users[0], [new ProductItem('test', 99, 1)]),
     new Receipt('DH03', users[0], [new ProductItem('test', 99, 1)]),
-    new Receipt('DH04', users[1], [new ProductItem('test', 99, 1)]),
-    new Receipt('DH05', users[1], [new ProductItem('test', 99, 1)])
+    new Receipt('DH04', users[0], [new ProductItem('test', 99, 1)]),
+    new Receipt('DH05', users[0], [new ProductItem('test', 99, 1), new ProductItem('test', 99, 1), new ProductItem('test', 99, 3)])
 
 ];
+
+export function getProducts() {
+    return receipts
+}

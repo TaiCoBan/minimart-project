@@ -21,7 +21,7 @@ const subNav = `
                 <li><a href="profile.html" class="title hidden-xs">Tài khoản</a></li>
                 <li class="hidden-xs">|</li>
                 <li><a href="login-form.html" class="title hidden-xs">Đăng nhập</a></li>
-                <li><a href="favorite-list.html"><i class="fa fa-heart"></i></a></li>
+                <li><a href="#"><i class="fa fa-heart"></i></a></li>
                 <li><a href="cart.html" class="title"><i class="fa fa-shopping-cart"></i> <sup
                             class="cart-quantity">1</sup></a>
                 </li>
@@ -80,7 +80,7 @@ const footerContactLinks = `
             </div>
             <div class="contact-info">
                 <span class="contact-icon"><i class="fa fa-envelope"></i></span>
-                <span class="contact-text">ldtt@TKW.com</span>
+                <span class="contact-text">tkw@TKW.com</span>
             </div>
         </div>
     </div>
@@ -91,10 +91,10 @@ const footerUsefulLinks = `
         <div class="footer-widget">
             <h3 class="footer-title">Tiện ích</h3>
             <ul class="arrow">
-                <li><a href="index.html">Trang chủ </a></li>
+                <li><a href="product-list.html">Trang chủ </a></li>
                 <li><a href="product-list.html">Sản phẩm</a></li>
-                <li><a href="about.html">Thông tin</a></li>
-                <li><a href="contact-us.html">Liên hệ</a></li>
+                <li><a href="#">Thông tin</a></li>
+                <li><a href="#">Liên hệ</a></li>
             </ul>
         </div>
     </div>
