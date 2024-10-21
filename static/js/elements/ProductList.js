@@ -1,10 +1,6 @@
-import { topHeader, headerWrapper, footer} from "./CommonElement.js"
+import {headerWrapper, footer} from "./CommonElement.js"
 
-const wholePage = `
-    ${topHeader}
-    <!-- header-section-->
-    ${headerWrapper}
-
+const pageHeader = `
     <div class="page-header">
         <div class="container">
             <div class="row">
@@ -19,6 +15,35 @@ const wholePage = `
             </div>
         </div>
     </div>
+`
+
+const productCard = `
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mb30">
+        <a href="product-single.html">
+            <div class="product-block">
+                <div class="product-img"><img src="images/product_img_2.png" alt=""></div>
+                <div class="product-content">
+                    <h5><a href="#" class="product-title">${product.name}<strong>(64GB,
+                                Blue)</strong></a>
+                    </h5>
+                    <div class="product-meta"><a href="#" class="product-price">$1200</a>
+                        <a href="#" class="discounted-price">${product.price}</a>
+                        <span class="offer-price">10%off</span>
+                    </div>
+                    <div class="shopping-btn">
+                        <a href="#" class="product-btn btn-like"><i class="fa fa-heart"></i></a>
+                        <a href="#" class="product-btn btn-cart"><i
+                                class="fa fa-shopping-cart"></i></a>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+`
+const wholePage = `
+    ${headerWrapper}
+    ${pageHeader}
+    
     <!-- /. header-section-->
     <!-- product-list -->
     <div class="content">
@@ -222,7 +247,6 @@ const wholePage = `
                                 <div class="select-option form-group">
                                     <select name="select" class="form-control" placeholder="Sắp xếp theo">
                                         <option value="" default>Sắp xếp theo</option>
-                                        <option value="">Bán Chạy</option>
                                         <option value="">Giá Thấp</option>
                                         <option value="">Giá Cao</option>
                                     </select>
@@ -231,209 +255,7 @@ const wholePage = `
                         </div>
                     </div>
                     <div class="row">
-                        <!-- product -->
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mb30">
-                            <a href="product-single.html">
-                                <div class="product-block">
-                                    <div class="product-img"><img src="images/product_img_1.png" alt=""></div>
-                                    <div class="product-content">
-                                        <h5><a href="#" class="product-title">Google Pixel <strong>(128GB,
-                                                    Black)</strong></a></h5>
-                                        <div class="product-meta"><a href="#" class="product-price">$1100</a>
-                                            <a href="#" class="discounted-price">$1400</a>
-                                            <span class="offer-price">20%off</span>
-                                        </div>
-                                        <div class="shopping-btn">
-                                            <a href="#" class="product-btn btn-like"><i class="fa fa-heart"></i></a>
-                                            <a href="#" class="product-btn btn-cart"><i
-                                                    class="fa fa-shopping-cart"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <!-- /.product -->
-                        <!-- product -->
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mb30">
-                            <a href="product-single.html">
-                                <div class="product-block">
-                                    <div class="product-img"><img src="images/product_img_2.png" alt=""></div>
-                                    <div class="product-content">
-                                        <h5><a href="#" class="product-title">HTC U Ultra <strong>(64GB,
-                                                    Blue)</strong></a>
-                                        </h5>
-                                        <div class="product-meta"><a href="#" class="product-price">$1200</a>
-                                            <a href="#" class="discounted-price">$1700</a>
-                                            <span class="offer-price">10%off</span>
-                                        </div>
-                                        <div class="shopping-btn">
-                                            <a href="#" class="product-btn btn-like"><i class="fa fa-heart"></i></a>
-                                            <a href="#" class="product-btn btn-cart"><i
-                                                    class="fa fa-shopping-cart"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <!-- /.product -->
-                        <!-- product -->
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mb30">
-                            <a href="product-single.html">
-                                <div class="product-block">
-                                    <div class="product-img"><img src="images/product_img_3.png" alt=""></div>
-                                    <div class="product-content">
-                                        <h5><a href="#" class="product-title">Samsung Galaxy Note 8</a></h5>
-                                        <div class="product-meta"><a href="#" class="product-price">$1500</a>
-                                            <a href="#" class="discounted-price">$2000</a>
-                                            <span class="offer-price">40%off</span>
-                                        </div>
-                                        <div class="shopping-btn">
-                                            <a href="#" class="product-btn btn-like"><i class="fa fa-heart"></i></a>
-                                            <a href="#" class="product-btn btn-cart"><i
-                                                    class="fa fa-shopping-cart"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <!-- /.product -->
-                        <!-- product -->
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mb30">
-                            <a href="product-single.html">
-                                <div class="product-block">
-
-                                    <div class="product-img"><img src="images/product_img_3.png" alt=""></div>
-                                    <div class="product-content">
-                                        <h5><a href="#" class="product-title">Samsung Galaxy Note 8</a></h5>
-                                        <div class="product-meta"><a href="#" class="product-price">$1500</a>
-                                            <a href="#" class="discounted-price">$2000</a>
-                                            <span class="offer-price">40%off</span>
-                                        </div>
-                                        <div class="shopping-btn">
-                                            <a href="#" class="product-btn btn-like"><i class="fa fa-heart"></i></a>
-                                            <a href="#" class="product-btn btn-cart"><i
-                                                    class="fa fa-shopping-cart"></i></a>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </a>
-
-                        </div>
-                        <!-- /.product -->
-                        <!-- product -->
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mb30">
-                            <a href="product-single.html">
-                                <div class="product-block">
-                                    <div class="product-img"><img src="images/product_img_4.png" alt=""></div>
-                                    <div class="product-content">
-                                        <h5><a href="#" class="product-title">Vivo V5 Plus <strong>(Matte
-                                                    Black)</strong></a></h5>
-                                        <div class="product-meta"><a href="#" class="product-price">$1500</a>
-                                            <a href="#" class="discounted-price">$2000</a>
-                                            <span class="offer-price">15%off</span>
-                                        </div>
-                                        <div class="shopping-btn">
-                                            <a href="#" class="product-btn btn-like">
-                                                <i class="fa fa-heart"></i></a>
-                                            <a href="#" class="product-btn btn-cart"><i
-                                                    class="fa fa-shopping-cart"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <!-- /.product -->
-                        <!-- product -->
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mb30">
-                            <a href="product-single.html">
-                                <div class="product-block">
-                                    <div class="product-img"><img src="images/product_img_2.png" alt=""></div>
-                                    <div class="product-content">
-                                        <h5><a href="#" class="product-title">HTC U Ultra <strong>(64GB,
-                                                    Blue)</strong></a>
-                                        </h5>
-                                        <div class="product-meta"><a href="#" class="product-price">$1200</a>
-                                            <a href="#" class="discounted-price">$1700</a>
-                                            <span class="offer-price">10%off</span>
-                                        </div>
-                                        <div class="shopping-btn">
-                                            <a href="#" class="product-btn btn-like"><i class="fa fa-heart"></i></a>
-                                            <a href="#" class="product-btn btn-cart"><i
-                                                    class="fa fa-shopping-cart"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <!-- /.product -->
-                        <!-- product -->
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mb30">
-                            <a href="product-single.html">
-                                <div class="product-block">
-                                    <div class="product-img"><img src="images/product_img_2.png" alt=""></div>
-                                    <div class="product-content">
-                                        <h5><a href="#" class="product-title">HTC U Ultra <strong>(64GB,
-                                                    Blue)</strong></a>
-                                        </h5>
-                                        <div class="product-meta"><a href="#" class="product-price">$1200</a>
-                                            <a href="#" class="discounted-price">$1700</a>
-                                            <span class="offer-price">10%off</span>
-                                        </div>
-                                        <div class="shopping-btn">
-                                            <a href="#" class="product-btn btn-like"><i class="fa fa-heart"></i></a>
-                                            <a href="#" class="product-btn btn-cart"><i
-                                                    class="fa fa-shopping-cart"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <!-- /.product -->
-                        <!-- product -->
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mb30">
-                            <a href="product-single.html">
-                                <div class="product-block">
-                                    <div class="product-img"><img src="images/product_img_3.png" alt=""></div>
-                                    <div class="product-content">
-                                        <h5><a href="#" class="product-title">Samsung Galaxy Note 8</a></h5>
-                                        <div class="product-meta"><a href="#" class="product-price">$1500</a>
-                                            <a href="#" class="discounted-price">$2000</a>
-                                            <span class="offer-price">40%off</span>
-                                        </div>
-                                        <div class="shopping-btn">
-                                            <a href="#" class="product-btn btn-like"><i class="fa fa-heart"></i></a>
-                                            <a href="#" class="product-btn btn-cart"><i
-                                                    class="fa fa-shopping-cart"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <!-- /.product -->
-                        <!-- product -->
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mb30">
-                            <a href="product-single.html">
-                                <div class="product-block">
-                                    <div class="product-img"><img src="images/product_img_2.png" alt=""></div>
-                                    <div class="product-content">
-                                        <h5><a href="#" class="product-title">HTC U Ultra <strong>(64GB,
-                                                    Blue)</strong></a>
-                                        </h5>
-                                        <div class="product-meta"><a href="#" class="product-price">$1200</a>
-                                            <a href="#" class="discounted-price">$1700</a>
-                                            <span class="offer-price">10%off</span>
-                                        </div>
-                                        <div class="shopping-btn">
-                                            <a href="#" class="product-btn btn-like"><i class="fa fa-heart"></i></a>
-                                            <a href="#" class="product-btn btn-cart"><i
-                                                    class="fa fa-shopping-cart"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <!-- /.product -->
+                        /* vong for hien thi san pham*/
                     </div>
                     <div class="row">
                         <!-- pagination start -->

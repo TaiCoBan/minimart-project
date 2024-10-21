@@ -1,21 +1,4 @@
 // Header
-export const topHeader = `
-    <div class="top-header">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-7 col-sm-6 hidden-xs">
-                    <p class="top-text">Flexible Delivery, Delivery.</p>
-                </div>
-                <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12">
-                    <ul>
-                        <li>+084 123 4567</li>
-                        <li>ldtt@TKW.com</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-`
 const logo = `
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-8">
         <div class="logo">
@@ -26,7 +9,7 @@ const logo = `
 const search = `
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <div class="search-bg">
-            <input type="text" class="form-control" placeholder="Search Here">
+            <input type="text" class="form-control" placeholder="Tìm kiếm">
             <button type="Submit"><i class="fa fa-search"></i></button>
         </div>
     </div>
@@ -108,11 +91,10 @@ const footerUsefulLinks = `
         <div class="footer-widget">
             <h3 class="footer-title">Tiện ích</h3>
             <ul class="arrow">
-                <li><a href="index.html">Home </a></li>
-                <li><a href="product-list.html">Mobie</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="blog-default.html">Blog</a></li>
-                <li><a href="contact-us.html">Contact</a></li>
+                <li><a href="index.html">Trang chủ </a></li>
+                <li><a href="product-list.html">Sản phẩm</a></li>
+                <li><a href="about.html">Thông tin</a></li>
+                <li><a href="contact-us.html">Liên hệ</a></li>
             </ul>
         </div>
     </div>
@@ -148,27 +130,7 @@ const footerSocialLinks = `
         </div>
     </div>
 `
-const tinyFooter = `
-    <div class="tiny-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="payment-method alignleft">
-                        <ul>
-                            <li><a href="#"><i class="fa fa-cc-paypal fa-2x"></i></a></li>
-                            <li><a href="#"><i class="fa fa-cc-mastercard  fa-2x"></i></a></li>
-                            <li><a href="#"><i class="fa fa-cc-visa fa-2x"></i></a></li>
-                            <li><a href="#"><i class="fa fa-cc-discover fa-2x"></i></a></li>
-                        </ul>
-                    </div>
-                    <p class="alignright">Copyright © All Rights Reserved 2020 Template Design by
-                        <a href="#/" target="_blank" class="copyrightlink">TKW</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-`
+
 export const footer = `
     <div class="footer">
         <div class="container">
@@ -179,6 +141,5 @@ export const footer = `
                 ${footerSocialLinks}
             </div>
         </div>
-        ${tinyFooter}
     </div>
 `

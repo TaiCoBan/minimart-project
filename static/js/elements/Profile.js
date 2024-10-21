@@ -1,4 +1,5 @@
-import { topHeader, headerWrapper, footer } from "./CommonElement.js"
+import { receipts } from "../data/data.js";
+import {headerWrapper, footer } from "./CommonElement.js"
 
 const userInfo = `
     <div class="user-infor">
@@ -9,18 +10,9 @@ const userInfo = `
 const sidebarContent = `
     <div class="side-bar-content">
         <ul>
-            <a id="info">
-                <li class="slide-bar"><i class="fa fa-edit"></i><span>Thông tin tài khoản</span>
-                </li>
-            </a>
-            <a id="receiots">
-                <li class="slide-bar"><i class="fas fa-money-check"></i><span>Quản lý đơn
-                        hàng</span></li>
-            </a>
-            <a id="reset">
-                <li class="slide-bar active"><i class="fas fa-lock"></i><span> Đổi mật khẩu</span>
-                </li>
-            </a>
+            <a href="#" id="info"><li><i class="fa fa-edit"></i><span>Thông tin tài khoản</span></li></a>
+            <a href="#" id="receipts"><li><i class="fas fa-money-check"></i><span>Quản lý đơn hàng</span></li></a>
+            <a href="#" id="reset"> <li><i class="fas fa-lock"></i><span> Đổi mật khẩu</span></li></a>
         </ul>
     </div>
 `
@@ -32,30 +24,35 @@ const leftContainer = `
     </div>
 `
 
+const receiptInfoMap = receipts.map(receipt => `
+    <tr>
+        <th scope="row">${receipt.id}</th>
+        <td>${receipt.cusName}</td>
+        <td>${receipt.date}</td>
+        <td><a href="#" id="details">Xem chi tiết</a></td>
+        <td>${receipt.status === 0 ? 'Đang xử lí' : 'Hoàn thành'}</td>
+    </tr>
+`).join('');
+
 const receiptInfo = `
     <h3 class="title-content">Đơn hàng</h3>
-    <div class="receipt-infor">
-        <table class="table table-hover">
-            <thead class="thead-light">
-                <tr>
-                <th scope="col">Mã đơn hàng</th>
-                <th scope="col">Tên khách hàng</th>
-                <th scope="col">Ngày đặt hàng</th>
-                <th scope="col">Chi tiết đơn hàng</th>
-                    <th scope="col">Tình trạng đơn hàng</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                <th scope="row">DH01</th>
-                <td>Du Khánh</td>
-                <td>10/10/2021</td>
-                <td><a href="profile-receipt-details.html">Xem chi tiết</a></td>
-                <td>Đang giao hàng</td>
-                </tr>
-            </tbody>
-            </table>
-    </div>
+        <div class="receipt-infor">
+            
+            <table class="table table-hover">
+                <thead class="thead-light">
+                    <tr>
+                    <th scope="col">Mã đơn hàng</th>
+                    <th scope="col">Tên khách hàng</th>
+                    <th scope="col">Ngày đặt hàng</th>
+                    <th scope="col">Chi tiết đơn hàng</th>
+                        <th scope="col">Tình trạng đơn hàng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${receiptInfoMap}
+                </tbody>
+                </table>
+        </div>
 `
 const accountInfo = `
     <h3 class="title-content">Thông tin tài khoản</h3>
@@ -88,13 +85,6 @@ const accountInfo = `
             </div>
             <div class="form-control">
                 <label for="" class="input-label">
-                    Ngày sinh
-                </label>
-                <input type="date" placeholder="Thêm ngày sinh" class="input-field">
-            </div>
-
-            <div class="form-control">
-                <label for="" class="input-label">
                     Giới tính
                 </label>
 
@@ -110,24 +100,125 @@ const accountInfo = `
 `
 const resetPasswordInfo = `
     <h3 class="title-content">Đổi mật khẩu</h3>
-    <div class="reset-password-content">
-        <form action="">
-            <div class="form-control">
-                <label for="" class="input-label">Mật khẩu hiện tại</label>
-                <input type="password" class="input-field" id="input">
+        <div class="reset-password-content">
+            <form action="">
+                <div class="form-control">
+                    <label for="" class="input-label">Mật khẩu hiện tại</label>
+                    <input type="password" class="input-field" id="input">
+                </div>
+                <div class="form-control">
+                    <label for="" class="input-label">Mật khẩu mới</label>
+                    <input type="password" class="input-field">
+                </div>
+                <div class="form-control">
+                    <label for="" class="input-label">Nhập lại mật khẩu</label>
+                    <input type="password" class="input-field">
+                </div>
+                <button class="btn-update-password">Đổi mật khẩu</button>
+            </form>
+        </div>
+`
+const receiptDetails = `
+    <h3 class="title-content">Đơn hàng đã đặt/ Chi tiết đơn hàng</h3>
+    <div class="receipt-infor-details">
+        <div class="title-receipt">
+            <div class="left-content content">
+                <h4>ĐƠN HÀNG</h4>
+                <p class="receipt-id">Mã đơn hàng: DH01</p>
+                <p class="receipt-time">Đặt hàng: 10/10/2021</p>
             </div>
-            <div class="form-control">
-                <label for="" class="input-label">Mật khẩu mới</label>
-                <input type="password" class="input-field">
+            <p></p>
+            <div class="right-content content">
+                <h4>THÔNG TIN NHẬN HÀNG</h4>
+                <p><strong>NGUYỄN DU KHÁNH</strong> - 0364413771</p>
+                <p class="address">số nhà 82, đường 30, khu phố 6 - Phường Bình Chiểu - Thành phố
+                    Thủ Đức - Hồ Chí Minh</p>
             </div>
-            <div class="form-control">
-                <label for="" class="input-label">Nhập lại mật khẩu</label>
-                <input type="password" class="input-field">
-            </div>
-            <button class="btn-update-password">Đổi mật khẩu</button>
-        </form>
+        </div>
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th>Sản phẩm</th>
+                    <th scope="col">Đơn giá</th>
+                    <th scope="col">Số lượng</th>
+                    <th scope="col">Thành tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="product-title">
+                            <img src="images/iPhone_13.jpg" alt="">
+                            <div>
+                                <p>iPhone 13 Pro 128GB</p>
+                                <p>Màu sắc: Đỏ</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td><div class="item-center">30.750.000đ</div></td>
+                    <td><div class="item-center">1</div></td>
+                    <td><div class="item-center">30.750.000đ</div></td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="product-title">
+                            <img src="images/iphone11.png" alt="">
+                            <div>
+                                <p>iPhone 11 Pro 128GB</p>
+                                <p>Màu sắc: Xanh</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td><div class="item-center">17.000.000đ</div></td>
+                    <td><div class="item-center">1</div></td>
+                    <td><div class="item-center">17.000.000đ</div></td>
+                </tr>
+
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    <td scope="row"></td>
+                    <td></td>
+                    <td scope="row">
+                        <div>
+                            <p>Tổng tiền:</p>
+                            <p>Phí vận chuyển:</p>
+                            <p>Tổng thanh toán:</p>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <p>47.750.000đ</p>
+                            <p>50.000đ</p>
+                            <p>47.800.000đ</p>
+                        </div>
+                    </td>
+                </tr>
+
+            </tfoot>
+        </table>
+        <a href="profile-receipt.html" class="redirect-to-receipt text-blue"><i class="fas fa-long-arrow-alt-left"></i> Danh sách đơn hàng</a>
     </div>
 `
+function createRecepitDetails(productItem) {
+    return `
+        <tr>
+            <td>
+                <div class="product-title">
+                    <img src="" alt="">
+                    <div>
+                        <p>${productItem.name}</p>
+                    </div>
+                </div>
+            </td>
+            <td><div class="item-center">${productItem.price}</div></td>
+            <td><div class="item-center">${productItem.quantity}</div></td>
+            <td><div class="item-center">${productItem.price * productItem.quantity}</div></td>
+        </tr>
+    `
+}
 const rightContainer = `
     <div class="right-container">
         <div id="main-content"></div>
@@ -146,10 +237,27 @@ const content = `
         </div>
     </div>
 `
+const pageHeader = `
+    <div class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="page-breadcrumb">
+                        <ol class="breadcrumb">
+                            <li><a href="#">Trang chủ</a></li>
+                            <li>Thông tin tài khoản</li>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+`
 
 const wholePage = `
-    ${topHeader}
     ${headerWrapper}
+    ${pageHeader}
     ${content}
     ${footer}
 `
@@ -171,6 +279,12 @@ document.getElementById('reset').onclick = function() {
     mainContentHandler(3);
 };
 
+document.querySelectorAll('#details').forEach(item => {
+    item.onclick = function() {
+        mainContentHandler(4);
+    };
+});
+
 function mainContentHandler(key) {
     if (key === 1) {
         mainContent.innerHTML = accountInfo;
@@ -178,6 +292,8 @@ function mainContentHandler(key) {
         mainContent.innerHTML = receiptInfo;
     } else if (key === 3) {
         mainContent.innerHTML = resetPasswordInfo;
+    } else if (key === 4) {
+        mainContent.innerHTML = receiptDetails;
     } else {
         mainContent.innerHTML = "Có lỗi xảy ra";
     }

@@ -1,7 +1,8 @@
 export class User {
-    constructor(id, fullName) {
+    constructor(id, fullName, address) {
         this.id = id
         this.fullName = fullName
+        this.address = address
         // this.email = email
         // this.number = number
         // this.username = username
@@ -15,10 +16,10 @@ export class User {
 }
 
 export class Product {
-    constructor(name, price, quantity) {
+    constructor(id, name, price) {
+        this.id = id
         this.name = name
         this.price = price
-        this.quantity = quantity
     }
 }
 
@@ -33,7 +34,7 @@ export class ProductItem {
     }
 }
 
-export class Bill {
+export class Receipt {
     constructor(id, User, productItems = []) {
         this.id = id
         this.cusName = User.getName()
