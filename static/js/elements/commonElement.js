@@ -1,8 +1,10 @@
+import { cart } from "../data/data.js"
+
 // Header
 const logo = `
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-8">
         <div class="logo">
-            <a href="index.html"><img src="../static/image/logo3.png" alt=""> </a>
+            <a href="product-list.html"><img src="../static/image/logo3.png" alt=""> </a>
         </div>
     </div>
 `
@@ -23,7 +25,7 @@ const subNav = `
                 <li><a href="login-form.html" class="title hidden-xs">Đăng nhập</a></li>
                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                 <li><a href="cart.html" class="title"><i class="fa fa-shopping-cart"></i> <sup
-                            class="cart-quantity">1</sup></a>
+                            class="cart-quantity">${cart.length}</sup></a>
                 </li>
             </ul>
         </div>
@@ -42,7 +44,7 @@ const navigation = `
                             </li>
                             <li><a href="#">Thông tin</a>
                             </li>
-                            <li><a href="#">Bài viết</a> </li>
+                            <li><a href="#">Khuyến mãi</a> </li>
                             <li><a href="#">Liên hệ</a>
                             </li>
                         </ul>

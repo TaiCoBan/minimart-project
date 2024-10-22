@@ -1,78 +1,50 @@
-import {headerWrapper, footer} from "./CommonElement.js"
+import { headerWrapper, footer } from "./CommonElement.js";
+import { products } from "../data/data.js";
+import { icQuantity, dcQuantity, addQuantityEventListeners } from "../service/ProductService.js"
 
-const pageHeader = `
-    <div class="page-header">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="page-breadcrumb">
-                        <ol class="breadcrumb">
-                            <li><a href="index.html">Trang chủ</a></li>
-                            <li>Điện thoại</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-`
+document.getElementById('header').innerHTML = headerWrapper;
+document.getElementById('footer').innerHTML = footer;
 
-const productCard = `
-    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mb30">
-        <a href="product-single.html">
-            <div class="product-block">
-                <div class="product-img"><img src="images/product_img_2.png" alt=""></div>
-                <div class="product-content">
-                    <h5><a href="#" class="product-title">${product.name}<strong>(64GB,
-                                Blue)</strong></a>
-                    </h5>
-                    <div class="product-meta"><a href="#" class="product-price">$1200</a>
-                        <a href="#" class="discounted-price">${product.price}</a>
-                        <span class="offer-price">10%off</span>
-                    </div>
-                    <div class="shopping-btn">
-                        <a href="#" class="product-btn btn-like"><i class="fa fa-heart"></i></a>
-                        <a href="#" class="product-btn btn-cart"><i
-                                class="fa fa-shopping-cart"></i></a>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </div>
-`
-const wholePage = `
-    ${headerWrapper}
-    ${pageHeader}
+// Hàm tạo thẻ sản phẩm
+function createProductCard(index) {
+    let product = products[index];
     
-    <!-- /. header-section-->
-    <!-- product-list -->
+    return `
+        <div id="to-${index}" class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mb30">
+            <a id="to-${index}">
+                <div class="product-block">
+                    <div class="product-img"><img src="${product.image}" alt="${product.name}"></div>
+                    <div class="product-content">
+                        <h5><a id="to-${index}" href="#" class="product-title">${product.name}</a></h5>
+                        <div class="product-meta">
+                            <a id="to-${index}" href="#" class="product-price">${product.price.toLocaleString()}đ</a>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    `;
+}
+
+// Hàm ánh xạ sản phẩm
+function mapProducts() {
+    return products.map((_, index) => createProductCard(index)).join(''); // Ensure correct usage of products
+}
+
+const mainContent = `
     <div class="content">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
-                    <!-- sidenav-section -->
                     <div id='cssmenu'>
                         <ul>
                             <li class='has-sub'><a href='#'>Hệ điều hành</a>
                                 <ul>
-
                                     <li>
                                         <label>
                                             <input type="checkbox">
                                             <span class="checkbox-list">Tất cả</span></label>
                                     </li>
-                                    <li>
-                                        <label>
-                                            <input type="checkbox">
-                                            <span class="checkbox-list">Android</span></label>
-                                    </li>
-                                    <li>
-                                        <label>
-                                            <input type="checkbox">
-                                            <span class="checkbox-list">ISO</span>
-                                        </label>
-                                    </li>
-
                                 </ul>
                             </li>
                             <li class='has-sub'><a href='#'>Hãng sản xuất</a>
@@ -83,56 +55,6 @@ const wholePage = `
                                             <span class="checkbox-list">Tất cả </span>
                                         </label>
                                     </li>
-                                    <li>
-                                        <label>
-                                            <input type="checkbox">
-                                            <span class="checkbox-list">Samsung</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label>
-                                            <input type="checkbox">
-                                            <span class="checkbox-list">Apple</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label>
-                                            <input type="checkbox">
-                                            <span class="checkbox-list">Xiaomi</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label>
-                                            <input type="checkbox">
-                                            <span class="checkbox-list">Vsmart</span>
-                                        </label>
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <label>
-                                            <input type="checkbox">
-                                            <span class="checkbox-list">OPPO</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label>
-                                            <input type="checkbox">
-                                            <span class="checkbox-list">Vivo</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label>
-                                            <input type="checkbox">
-                                            <span class="checkbox-list">Nokia</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label>
-                                            <input type="checkbox">
-                                            <span class="checkbox-list">Huawei</span>
-                                        </label>
-                                    </li>
-
                                 </ul>
                             </li>
                             <li class='has-sub'><a href='#'>Giá Bán</a>
@@ -143,38 +65,6 @@ const wholePage = `
                                             <span class="checkbox-list">Tất cả</span>
                                         </label>
                                     </li>
-                                    <li>
-                                        <label>
-                                            <input type="checkbox">
-                                            <span class="checkbox-list">Dưới 2 triệu</span>
-                                        </label>
-                                    </li>
-                                    <li><span>
-                                            <label>
-                                                <input type="checkbox">
-                                                <span class="checkbox-list">Từ 2 - 5 triệu</span>
-                                            </label>
-                                    </li>
-                                    <li>
-                                        <label>
-                                            <input type="checkbox">
-                                            <span class="checkbox-list">Từ 5 - 10 triệu</span>
-                                        </label>
-                                    </li>
-
-                                    <li><span>
-                                            <label>
-                                                <input type="checkbox">
-                                                <span class="checkbox-list">Từ 10 - 15 triệu</span>
-                                            </label>
-                                    </li>
-                                    <li>
-                                        <label>
-                                            <input type="checkbox">
-                                            <span class="checkbox-list">Trên 15 triệu</span>
-                                        </label>
-                                    </li>
-
                                 </ul>
                             </li>
                             <li class='has-sub'><a href='#'>Màn hình</a>
@@ -185,19 +75,6 @@ const wholePage = `
                                             <span class="checkbox-list">Tất cả</span>
                                         </label>
                                     </li>
-                                    <li>
-                                        <label>
-                                            <input type="checkbox">
-                                            <span class="checkbox-list">Dưới 5.0 inch</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label>
-                                            <input type="checkbox">
-                                            <span class="checkbox-list">Trên 6.0 inch</span>
-                                        </label>
-                                    </li>
-
                                 </ul>
                             </li>
                             <li class='has-sub'><a href='#'>Bộ nhớ trong</a>
@@ -208,45 +85,19 @@ const wholePage = `
                                             <span class="checkbox-list">Tất cả</span>
                                         </label>
                                     </li>
-                                    <li>
-                                        <label>
-                                            <input type="checkbox">
-                                            <span class="checkbox-list">Dưới 32GB</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label>
-                                            <input type="checkbox">
-                                            <span class="checkbox-list">64GB và 128GB</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label>
-                                            <input type="checkbox">
-                                            <span class="checkbox-list">256GB và 512GB</span>
-                                        </label>
-                                    </li>
-
-                                    <li>
-                                        <label>
-                                            <input type="checkbox">
-                                            <span class="checkbox-list">Trên 512GB</span>
-                                        </label>
-                                    </li>
                                 </ul>
                             </li>
-
                         </ul>
                     </div>
-                    <!-- /.sidenav-section -->
                 </div>
                 <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
                     <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mb10 alignright">
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 alignright" style="margin-bottom: 10px;">
                             <form>
                                 <div class="select-option form-group">
                                     <select name="select" class="form-control" placeholder="Sắp xếp theo">
                                         <option value="" default>Sắp xếp theo</option>
+                                        <option value="">Bán Chạy</option>
                                         <option value="">Giá Thấp</option>
                                         <option value="">Giá Cao</option>
                                     </select>
@@ -254,20 +105,21 @@ const wholePage = `
                             </form>
                         </div>
                     </div>
+
                     <div class="row">
-                        /* vong for hien thi san pham*/
+                        ${mapProducts()} <!-- Gọi hàm mapProducts để hiển thị sản phẩm -->
                     </div>
+
                     <div class="row">
                         <!-- pagination start -->
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="st-pagination">
-                                <ul class="pagination">
-                                    <li><a href="#" aria-label="previous"><i class="fa fa-angle-left" style="font-size: 16px;"></i></a>
-                                    </li>
+                                <ul class="pagination" style="display: inline;">
+                                    <li><a href="#" aria-label="previous"><i class="fa fa-angle-left" style="font-size: 16px;"></i></a></li>
                                     <li class="active"><a href="#">1</a></li>
                                     <li><a href="#">2</a></li>
                                     <li><a href="#">3</a></li>
-                                    <li> <a href="#" aria-label="Next"><i class="fa fa-angle-right" style="font-size: 16px;"></i></li>
+                                    <li><a href="#" aria-label="Next"><i class="fa fa-angle-right" style="font-size: 16px;"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -277,8 +129,74 @@ const wholePage = `
             </div>
         </div>
     </div>
-    <!-- /.product-list -->
-    ${footer}
-`
+`;
 
-document.getElementById('whole-page').innerHTML = wholePage
+function renderSingleContent(index) {
+    const mainContent = `
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="box">
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                        <ul id="demo1_thumbs" class="slideshow_thumbs">
+                                            <li>
+                                                <img src="${products[index].image}" alt="Product Thumbnail" />
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div id="slideshow">
+                                            <img src="${products[index].image}" alt="Product Image" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="product-single">
+                                            <h2>${products[index].name}</h2>
+                                            <p class="product-price" style="font-size: 25px;">${products[index].price.toLocaleString()}đ</p>
+                                            
+                                            <div class="product-quantity">
+                                                <h4>Số lượng</h4>
+                                                <div class="quantity mb20">
+                                                    <input class="btn-quantity decrease-quantity" onclick="dcQuantity()" type="button" value="-">
+                                                    <input type="number" name="quantity" value="1" class="quantity-input" id=" id="quantity-input-${index}">
+                                                    <input class="btn-quantity increase-quantity" onclick="icQuantity()" type="button" value="+">
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <button class="btn btn-default btn-buy-now" onclick="buyNow(${index})">
+                                                    Mua Ngay
+                                                </button>
+                                                <button type="submit" class="btn btn-default" onclick="addToCart(cart[${index}])">
+                                                    <i class="fa fa-shopping-cart"></i>&nbsp;Thêm vào giỏ hàng
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.getElementById('main-content').innerHTML = mainContent;
+    addQuantityEventListeners(); // Gắn sự kiện tăng/giảm số lượng
+}
+
+
+// Gán sự kiện cho hình ảnh sản phẩm để render nội dung đơn lẻ
+function addToSinglePageEventListeners() {
+    products.forEach((_, index) => {
+        document.getElementById(`to-${index}`).addEventListener('click', () => {
+            renderSingleContent(index); // Gọi hàm renderSingleContent để hiển thị sản phẩm đơn lẻ
+        });
+    });
+}
+
+document.getElementById('main-content').innerHTML = mainContent;
+addToSinglePageEventListeners();

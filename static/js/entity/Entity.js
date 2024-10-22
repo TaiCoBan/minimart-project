@@ -1,15 +1,18 @@
 export class Product {
-    constructor(name, price) {
+    constructor(name, price, image) {
         this.name = name
         this.price = price
+        this.image = image;
     }
 }
 
 export class ProductItem {
-    constructor(name, price, quantity) {
-        this.name = name
-        this.price = price
-        this.quantity = quantity
+    constructor(name, price, quantity, image) {
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.image = image;
+        this.choose = false
     }
 
     getPrice() {

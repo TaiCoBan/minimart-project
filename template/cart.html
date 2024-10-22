@@ -5,9 +5,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="keywords" content="">
     <title>Giỏ hàng</title>
     <!-- Fontawsome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -24,9 +21,9 @@
 </head>
 
 <body>
+    
     <div id="header"></div>
-    <!-- /. header-section-->
-    <!-- page-header -->
+
     <div class="page-header">
         <div class="container">
             <div class="row">
@@ -43,223 +40,11 @@
             </div>
         </div>
     </div>
-    <!-- /.page-header-->
-    <!-- cart-section -->
 
-    <div class="container">
-        <div class="cart-content" style="margin-top: 30px; margin-bottom: 30px">
-            <div class="title-header" style="margin-bottom: 20px;">
-                <h2 class="title">Giỏ Hàng</h2>
-            </div>
-            <table class="table">
-                <thead class="thead-light">
-                    <tr>
-                        <th></th>
-                        <th>Sản phẩm</th>
-                        <th scope="col">Đơn giá</th>
-                        <th scope="col">Số lượng</th>
-                        <th scope="col">Thành tiền</th>
-                        <th scope="col"></th>
+    <div id="main-content"></div>
 
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <div class="item-center" style="padding-left: 10px;"><input type="checkbox" class="checkboxStyle"></div>
-                        </td>
-                        <td>
-                            <div class="product-title item-center">
-                                <img src="images/iPhone_13.jpg" alt="">
-                                <div>
-                                    <p>iPhone 13 Pro 128GB</p>
-                                    <p>Màu sắc: Đỏ</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="item-center">30.750.000đ</div>
-                        </td>
-                        <td>
-                            <div class="item-center">
-                                <div class="quantity">
-                                    <input class="btn-quantity decrease-quantity" onclick="dcQuantity('quantity-input')"
-                                        type="button" value="-">
-                                    <input type="number" max="10" min="1" name="quantity" value="1"
-                                        class="quantity-input" id="quantity-input">
-                                    <input class="btn-quantity increase-quantity" onclick="icQuantity('quantity-input')"
-                                        type="button" value="+">
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="item-center text-red">30.750.000đ</div>
-                        </td>
-                        <td>
-                            <div class="item-center pinside10"><i class="far fa-trash-alt remove-product"></i></div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="item-center" style="padding-left: 10px;"><input type="checkbox" class="checkboxStyle"></div>
-                        </td>
-                        <td>
-                            <div class="product-title item-center">
-                                <img src="images/iphone11.png" alt="">
-                                <div>
-                                    <p>iPhone 11 Pro 128GB</p>
-                                    <p>Màu sắc: Xanh</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="item-center">17.000.000đ</div>
-                        </td>
-                        <td>
-                            <div class="item-center">
-                                <div class="quantity">
-                                    <input class="btn-quantity decrease-quantity"
-                                        onclick="dcQuantity('quantity-input2')" type="button" value="-">
-                                    <input type="number" max="10" min="1" name="quantity" value="1"
-                                        class="quantity-input" id="quantity-input2">
-                                    <input class="btn-quantity increase-quantity"
-                                        onclick="icQuantity('quantity-input2')" type="button" value="+">
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="item-center text-red">17.000.000đ</div>
-                        </td>
-                        <td>
-                            <div class="item-center pinside10"><i class="far fa-trash-alt"></i></div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="prices-summary">
-                <div class="left-content">
-                    <a href="product-list.html" class="derection-product text-blue"><i
-                            class="fas fa-long-arrow-alt-left"></i> Tiếp tục mua hàng</a>
-                </div>
-                <div class="right-con">
-                    <div class="total-receipt">
-                        <div class="prices-total pinside20">
-                            <span class="price-text">Tổng cộng</span>
-                            <span id="total-price" class="prices-value prices-final text-red">47.750.000đ</span>
-                        </div>
-                    </div>
-                    <a href="checkout.html" class="btn-default btn-checkout">Mua Hàng</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /.cart-total -->
-    </div>
-
-    <!-- /.cart-section -->
     <div id="footer"></div>
-
     <script type="module" src="../static/js/elements/Cart.js"></script>
-    <script>
-        // Giảm số lượng sản phẩm
-        function dcQuantity(key) {
-            var result = document.getElementById(key);
-            var qty = parseInt(result.value);
-            if (!isNaN(qty) && qty > 1) {
-                result.value = qty - 1;
-                calculateTotalPrice(); // Cập nhật tổng giá ngay khi thay đổi số lượng
-            }
-        }
-
-        // Tăng số lượng sản phẩm
-        function icQuantity(key) {
-            var result = document.getElementById(key);
-            var qty = parseInt(result.value);
-            if (!isNaN(qty) && qty < 10) {
-                result.value = qty + 1;
-                calculateTotalPrice(); // Cập nhật tổng giá ngay khi thay đổi số lượng
-            }
-        }
-
-        // Lấy các phần tử cần thiết
-        const checkboxes = document.querySelectorAll('.checkboxStyle');
-        const prices = document.querySelectorAll('.item-center.text-red'); // Lấy giá từ cột Thành tiền
-        const quantities = document.querySelectorAll('.quantity-input');
-        const totalPriceElement = document.getElementById('total-price');
-
-        // Hàm tính tổng giá trị
-        function calculateTotalPrice() {
-            let totalPrice = 0;
-
-            checkboxes.forEach((checkbox, index) => {
-                if (checkbox.checked) {
-                    const price = parseFloat(prices[index].textContent.replace(/\D/g, '')); // Loại bỏ ký tự không phải số
-                    const quantity = parseInt(quantities[index].value);
-                    if (!isNaN(price) && !isNaN(quantity)) {
-                        totalPrice += price * quantity;
-                    }
-                }
-            });
-
-            totalPriceElement.textContent = totalPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
-        }
-
-        // Hàm xóa sản phẩm
-        function removeProduct(event) {
-            // Xác định dòng sản phẩm tương ứng
-            const row = event.target.closest('tr');
-
-            // Xóa dòng sản phẩm khỏi bảng
-            row.remove();
-
-            // Cập nhật lại danh sách phần tử sau khi xóa
-            updateElements();
-
-            // Cập nhật lại tổng giá
-            calculateTotalPrice();
-        }
-
-        // Hàm cập nhật lại danh sách các phần tử cần tính toán
-        function updateElements() {
-            checkboxes = document.querySelectorAll('.checkboxStyle');
-            prices = document.querySelectorAll('.item-center.text-red');
-            quantities = document.querySelectorAll('.quantity-input');
-        }
-
-        // Thêm sự kiện cho tất cả các icon thùng rác
-        const removeButtons = document.querySelectorAll('.remove-product');
-        removeButtons.forEach(button => {
-            button.addEventListener('click', removeProduct);
-        });
-
-        // Hàm tính tổng giá trị (không thay đổi so với trước)
-        function calculateTotalPrice() {
-            let totalPrice = 0;
-
-            checkboxes.forEach((checkbox, index) => {
-                if (checkbox.checked) {
-                    const price = parseFloat(prices[index].textContent.replace(/\D/g, ''));
-                    const quantity = parseInt(quantities[index].value);
-                    if (!isNaN(price) && !isNaN(quantity)) {
-                        totalPrice += price * quantity;
-                    }
-                }
-            });
-
-            totalPriceElement.textContent = totalPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
-        }
-
-        // Lắng nghe các sự kiện thay đổi
-        checkboxes.forEach((checkbox, index) => {
-            checkbox.addEventListener('change', calculateTotalPrice);
-            quantities[index].addEventListener('input', calculateTotalPrice);
-        });
-
-        // Gọi hàm tính tổng giá trị ban đầu
-        calculateTotalPrice();
-
-    </script>
 </body>
 
 </html>
