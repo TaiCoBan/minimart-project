@@ -37,13 +37,13 @@ const navigation = `
                     <!-- navigations-->
                     <div id="navigation">
                         <ul>
-                            <li class="active"><a href="index.html">Trang chủ</a></li>
+                            <li class="active"><a href="#">Trang chủ</a></li>
                             <li><a href="product-list.html">Sản phẩm</a>
                             </li>
-                            <li><a href="about.html">Thông tin</a>
+                            <li><a href="#">Thông tin</a>
                             </li>
-                            <li><a href="blog-default.html">Bài viết</a> </li>
-                            <li><a href="contact-us.html">Liên hệ</a>
+                            <li><a href="#">Bài viết</a> </li>
+                            <li><a href="#">Liên hệ</a>
                             </li>
                         </ul>
                     </div>
