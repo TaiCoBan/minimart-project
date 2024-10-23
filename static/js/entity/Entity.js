@@ -1,8 +1,25 @@
 export class Product {
-    constructor(name, price, image) {
+    constructor(name, price, image, productDetail) {
         this.name = name
         this.price = price
-        this.image = image;
+        this.image = image
+        this.productDetail = productDetail;
+    }
+
+    getName() {
+        return this.name
+    }
+
+    getPrice() {
+        return this.price
+    }
+
+    getImage() {
+        return this.image
+    }
+
+    getProductDetail() {
+        return this.productDetail
     }
 }
 

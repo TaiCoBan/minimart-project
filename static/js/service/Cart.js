@@ -1,11 +1,18 @@
 import { headerWrapper, footer } from "./CommonElement.js";
-import { cart } from "../data/data.js";
-import { dcQuantity, icQuantity, addQuantityEventListeners } from "../service/ProductService.js";
+import { updateCart } from "./CartManager.js";
 
 document.getElementById('header').innerHTML = headerWrapper;
 document.getElementById('footer').innerHTML = footer;
 
+export let cart = []; // Khởi tạo cart là mảng rỗng
 export let totalPrice = 0;
+
+export function loadCart() {
+    // Lấy giỏ hàng từ localStorage và gán vào biến cart
+    const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart = storedCart;
+    console.log("Giỏ hàng đã tải:", cart);
+}
 
 function createCartItem(cartItem, index) {
     return `
@@ -19,7 +26,7 @@ function createCartItem(cartItem, index) {
                 <div class="product-title item-center">
                     <img src="${cartItem.image}" alt="">
                     <div>
-                        <p style="colour: black;">${cartItem.name}</p>
+                        <p style="color: black;">${cartItem.name}</p>
                     </div>
                 </div>
             </td>
@@ -36,7 +43,7 @@ function createCartItem(cartItem, index) {
                 </div>
             </td>
             <td>
-                <div class="item-center text-red">${(cartItem.price).toLocaleString()}đ</div>
+                <div class="item-center text-red">${(cartItem.price * cartItem.quantity).toLocaleString()}đ</div>
             </td>
             <td>
                 <div id="trash-${index}" class="item-center" style="padding: 10px"><i class="far fa-trash-alt"></i></div>
@@ -44,20 +51,9 @@ function createCartItem(cartItem, index) {
         </tr>
     `;
 }
-
 function cartItemMap(cart) {
     return cart.map((cartItem, index) => createCartItem(cartItem, index)).join('');
 }
-
-export function totalPriceF(cart) {
-    totalPrice = 0; // Reset giá trị tổng trước khi tính lại
-    cart.forEach(item => {
-        if (item.choose) {
-            totalPrice += (item.price * item.quantity);
-        }
-    });
-}
-
 export function renderCart() {
     const tbody = `
         <tbody>
@@ -109,38 +105,80 @@ export function renderCart() {
     addTrashEventListeners();
 }
 
+
+export function totalPriceF(cart) {
+    totalPrice = 0; // Reset giá trị tổng trước khi tính lại
+    cart.forEach(item => {
+        if (item.choose) {
+            totalPrice += (item.price * item.quantity);
+        }
+    });
+}
 function changeChoose(index) {
     let item = cart[index];
     if (item) {
         item.choose = !item.choose;  // Đảo trạng thái
     }
+    updateCart(); // Cập nhật giỏ hàng sau khi thay đổi
     totalPriceF(cart); // Tính lại tổng giá
     renderCart(); // Render lại giỏ hàng sau khi thay đổi
 }
 
-function removeItemFromCart(index) {
-    // Xóa sản phẩm khỏi giỏ hàng
-    cart.splice(index, 1);
-    
-    // Tính lại tổng giá
-    totalPriceF(cart);
 
-    // Render lại giỏ hàng sau khi xoá
-    renderCart();
-}
 
-// Sau khi render, gắn sự kiện bằng JavaScript
 function addCheckboxEventListeners() {
     cart.forEach((item, index) => {
         document.getElementById(`choose-${index}`).addEventListener('click', () => changeChoose(index));
     });
 }
-
 function addTrashEventListeners() {
     cart.forEach((item, index) => {
         document.getElementById(`trash-${index}`).addEventListener('click', () => removeItemFromCart(index));
     });
 }
-// Lần đầu tiên render giỏ hàng
+
+
+
+// Lần đầu tiên load giỏ hàng từ Local Storage và render
+loadCart(); // Gọi hàm này khi ứng dụng khởi động
 totalPriceF(cart);
 renderCart();
+
+
+
+function dcQuantity(index) {
+    let item = cart[index];
+    if (item.quantity > 1) {
+        item.quantity--;
+    }
+    updateCart();
+    totalPriceF(cart);
+    document.getElementById('header').innerHTML = headerWrapper;
+    renderCart();
+}
+function icQuantity(index) {
+    let item = cart[index];
+    item.quantity++;
+    updateCart();
+    totalPriceF(cart);
+    document.getElementById('header').innerHTML = headerWrapper;
+    renderCart();
+}
+function addQuantityEventListeners() {
+    cart.forEach((item, index) => {
+        const quantityInput = document.querySelector(`#quantity-input-${index}`);
+
+        if (quantityInput) {
+            const decreaseBtn = quantityInput.previousElementSibling;
+            const increaseBtn = quantityInput.nextElementSibling;
+
+            // Kiểm tra nếu các nút tăng/giảm tồn tại
+            if (decreaseBtn) {
+                decreaseBtn.addEventListener('click', () => dcQuantity(index));
+            }
+            if (increaseBtn) {
+                increaseBtn.addEventListener('click', () => icQuantity(index));
+            }
+        }
+    });
+}

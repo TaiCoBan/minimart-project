@@ -1,4 +1,4 @@
-import { cart } from "../data/data.js"
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 // Header
 const logo = `
@@ -25,7 +25,7 @@ const subNav = `
                 <li><a href="login-form.html" class="title hidden-xs">Đăng nhập</a></li>
                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                 <li><a href="cart.html" class="title"><i class="fa fa-shopping-cart"></i> <sup
-                            class="cart-quantity">${cart.length}</sup></a>
+                            class="cart-quantity" id="cart-quantity">${cart.length}</sup></a>
                 </li>
             </ul>
         </div>
