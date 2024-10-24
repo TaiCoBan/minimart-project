@@ -1,18 +1,11 @@
 import { headerWrapper, footer } from "./CommonElement.js";
-import { updateCart } from "./CartManager.js";
 
 document.getElementById('header').innerHTML = headerWrapper;
 document.getElementById('footer').innerHTML = footer;
 
-export let cart = []; // Khởi tạo cart là mảng rỗng
+export let cart = JSON.parse(localStorage.getItem('cart')) || [];
+console.log('(1)', localStorage.getItem('cart'))
 export let totalPrice = 0;
-
-export function loadCart() {
-    // Lấy giỏ hàng từ localStorage và gán vào biến cart
-    const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
-    cart = storedCart;
-    console.log("Giỏ hàng đã tải:", cart);
-}
 
 function createCartItem(cartItem, index) {
     return `
@@ -105,25 +98,53 @@ export function renderCart() {
     addTrashEventListeners();
 }
 
+// Lấy cart từ local storage
+export function loadCart() {
+    const storedCart = localStorage.getItem('cart');
+    cart = storedCart ? JSON.parse(storedCart) : [];
+    console.log("(loadCart) cart:", cart);
+}
+
+// update cart vào local storage
+export function updateCart(cart) {
+    localStorage.setItem('cart', JSON.stringify(cart)); // Lưu giỏ hàng vào localStorage
+    console.log('(updateCart) cart: ', cart);
+}
 
 export function totalPriceF(cart) {
-    totalPrice = 0; // Reset giá trị tổng trước khi tính lại
+    totalPrice = 0;
     cart.forEach(item => {
         if (item.choose) {
             totalPrice += (item.price * item.quantity);
         }
     });
+    console.log('(totalPriceF)')
 }
 function changeChoose(index) {
+    console.log('(changeChoose) BEGIN:')
     let item = cart[index];
     if (item) {
         item.choose = !item.choose;  // Đảo trạng thái
     }
-    updateCart(); // Cập nhật giỏ hàng sau khi thay đổi
+    updateCart(cart); // Cập nhật giỏ hàng sau khi thay đổi
     totalPriceF(cart); // Tính lại tổng giá
     renderCart(); // Render lại giỏ hàng sau khi thay đổi
+    console.log('(changeChoose) END')
 }
 
+// D
+export function removeItemFromCart(index) {
+    console.log('(removeItemFromCart) BEGIN:')
+    // Xóa sản phẩm khỏi giỏ hàng
+    cart.splice(index, 1);
+    
+    // Tính lại tổng giá
+    totalPriceF(cart);
+    updateCart(cart); // Cập nhật giỏ hàng sau khi xóa
+    // Render lại giỏ hàng sau khi xoá
+    renderCart();
+    console.log('(removeItemFormCart) END')
+}
 
 
 function addCheckboxEventListeners() {
@@ -135,34 +156,6 @@ function addTrashEventListeners() {
     cart.forEach((item, index) => {
         document.getElementById(`trash-${index}`).addEventListener('click', () => removeItemFromCart(index));
     });
-}
-
-
-
-// Lần đầu tiên load giỏ hàng từ Local Storage và render
-loadCart(); // Gọi hàm này khi ứng dụng khởi động
-totalPriceF(cart);
-renderCart();
-
-
-
-function dcQuantity(index) {
-    let item = cart[index];
-    if (item.quantity > 1) {
-        item.quantity--;
-    }
-    updateCart();
-    totalPriceF(cart);
-    document.getElementById('header').innerHTML = headerWrapper;
-    renderCart();
-}
-function icQuantity(index) {
-    let item = cart[index];
-    item.quantity++;
-    updateCart();
-    totalPriceF(cart);
-    document.getElementById('header').innerHTML = headerWrapper;
-    renderCart();
 }
 function addQuantityEventListeners() {
     cart.forEach((item, index) => {
@@ -182,3 +175,26 @@ function addQuantityEventListeners() {
         }
     });
 }
+function dcQuantity(index) {
+    let item = cart[index];
+    if (item.quantity > 1) {
+        item.quantity--;
+    }
+    updateCart(cart);
+    totalPriceF(cart);
+    document.getElementById('header').innerHTML = headerWrapper;
+    renderCart();
+}
+function icQuantity(index) {
+    let item = cart[index];
+    item.quantity++;
+    updateCart(cart);
+    totalPriceF(cart);
+    document.getElementById('header').innerHTML = headerWrapper;
+    renderCart();
+}
+
+// Lần đầu tiên load giỏ hàng từ Local Storage và render
+loadCart(); // Gọi hàm này khi ứng dụng khởi động
+totalPriceF(cart);
+renderCart();

@@ -1,11 +1,9 @@
 import { headerWrapper, footer } from "./CommonElement.js";
 import { products } from "../data/data.js";
-import { addToCart } from "./CartManager.js";
+import { updateCart, totalPriceF, loadCart } from "./Cart.js";
 
-// Lấy giỏ hàng từ Local Storage hoặc khởi tạo nếu không có
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
+export let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-// Đặt nội dung header và footer
 document.getElementById('header').innerHTML = headerWrapper;
 document.getElementById('footer').innerHTML = footer;
 
@@ -32,7 +30,6 @@ function createProductCard(index) {
 function mapProducts() {
     return products.map((_, index) => createProductCard(index)).join('');
 }
-
 const mainContent = `
     <div class="content">
         <div class="container">
@@ -87,6 +84,32 @@ const mainContent = `
     </div>
 `;
 
+function addToCart(index) {
+    console.log('(addToCart) BEGIN: ')
+    const product = products[index];
+
+    const existingItem = cart.find(item => item.name === product.name);
+    if (existingItem) {
+        existingItem.quantity += 1;  // Tăng số lượng
+        console.log(`Tăng số lượng sản phẩm ${existingItem.name}: ${existingItem.quantity}`);
+    } else {
+        cart.push({ 
+            name: product.name, 
+            price: product.price, 
+            quantity: 1, 
+            image: product.image,
+            choose: true  // Chọn mặc định khi thêm sản phẩm
+        });
+        console.log(`Thêm sản phẩm mới: ${product.name}`);
+    }
+    
+    updateCart(cart);
+    totalPriceF(cart); // Tính lại tổng giá
+    console.log('(addToCart) product: ', product)
+    console.log("(addToCart) cart:", cart);
+    console.log('(addToCart) END ')
+}
+
 
 function addAddToCartEventListeners() {
     products.forEach((_, index) => {
@@ -95,4 +118,8 @@ function addAddToCartEventListeners() {
 }
 
 document.getElementById('main-content').innerHTML = mainContent;
-addAddToCartEventListeners()
+addAddToCartEventListeners();
+// document.addEventListener("DOMContentLoaded", () => {
+//     document.getElementById('main-content').innerHTML = mainContent;
+//     addAddToCartEventListeners();  // Gán sự kiện sau khi nội dung được render
+// });

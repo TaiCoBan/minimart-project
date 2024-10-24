@@ -1,5 +1,3 @@
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
 // Header
 const logo = `
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-8">
@@ -25,7 +23,7 @@ const subNav = `
                 <li><a href="login-form.html" class="title hidden-xs">Đăng nhập</a></li>
                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                 <li><a href="cart.html" class="title"><i class="fa fa-shopping-cart"></i> <sup
-                            class="cart-quantity" id="cart-quantity">${cart.length}</sup></a>
+                            class="cart-quantity" id="cart-quantity">0</sup></a>
                 </li>
             </ul>
         </div>
@@ -145,3 +143,6 @@ export const footer = `
         </div>
     </div>
 `
+
+document.getElementById('header').innerHTML = headerWrapper
+document.getElementById('footer').innerHTML = footer
