@@ -3,9 +3,7 @@ import { products } from "../data/data.js";
 import { updateCart, totalPriceF, loadCart } from "./Cart.js";
 
 export let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-document.getElementById('header').innerHTML = headerWrapper;
-document.getElementById('footer').innerHTML = footer;
+export let cartCount = cart.length;
 
 function createProductCard(index) {
     let product = products[index];
@@ -84,6 +82,12 @@ const mainContent = `
     </div>
 `;
 
+export function updateCartCount(cart) {
+    const cartQuantityElement = document.getElementById('cart-quantity');
+    cartQuantityElement.textContent = cart.length; // Hiển thị số lượng hiện tại của giỏ hàng
+    console.log('(updateCartCount) cartCount: ', cart.length)
+}
+
 function addToCart(index) {
     console.log('(addToCart) BEGIN: ')
     const product = products[index];
@@ -91,7 +95,7 @@ function addToCart(index) {
     const existingItem = cart.find(item => item.name === product.name);
     if (existingItem) {
         existingItem.quantity += 1;  // Tăng số lượng
-        console.log(`Tăng số lượng sản phẩm ${existingItem.name}: ${existingItem.quantity}`);
+        console.log(`increase quantity ${existingItem.name}: ${existingItem.quantity}`);
     } else {
         cart.push({ 
             name: product.name, 
@@ -100,11 +104,12 @@ function addToCart(index) {
             image: product.image,
             choose: true  // Chọn mặc định khi thêm sản phẩm
         });
-        console.log(`Thêm sản phẩm mới: ${product.name}`);
+        console.log(`new product: ${product.name}`);
     }
     
     updateCart(cart);
     totalPriceF(cart); // Tính lại tổng giá
+    updateCartCount(cart)
     console.log('(addToCart) product: ', product)
     console.log("(addToCart) cart:", cart);
     console.log('(addToCart) END ')
@@ -117,8 +122,23 @@ function addAddToCartEventListeners() {
     });
 }
 
-document.getElementById('main-content').innerHTML = mainContent;
-addAddToCartEventListeners();
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById('header').innerHTML = headerWrapper;
+    document.getElementById('footer').innerHTML = footer;
+    document.getElementById('main-content').innerHTML = mainContent;
+    
+    // Gọi `updateCartCount` sau khi nội dung được render
+    updateCartCount(cart); 
+    addAddToCartEventListeners();
+});
+
+
+// document.getElementById('main-content').innerHTML = mainContent;
+// document.getElementById('header').innerHTML = headerWrapper;
+// document.getElementById('footer').innerHTML = footer;
+// addAddToCartEventListeners();
+
+
 // document.addEventListener("DOMContentLoaded", () => {
 //     document.getElementById('main-content').innerHTML = mainContent;
 //     addAddToCartEventListeners();  // Gán sự kiện sau khi nội dung được render

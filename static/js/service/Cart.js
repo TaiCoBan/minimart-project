@@ -1,4 +1,5 @@
 import { headerWrapper, footer } from "./CommonElement.js";
+import { updateCartCount } from "./ProductList.js"
 
 document.getElementById('header').innerHTML = headerWrapper;
 document.getElementById('footer').innerHTML = footer;
@@ -128,6 +129,7 @@ function changeChoose(index) {
     }
     updateCart(cart); // Cập nhật giỏ hàng sau khi thay đổi
     totalPriceF(cart); // Tính lại tổng giá
+    updateCartCount(cart)
     renderCart(); // Render lại giỏ hàng sau khi thay đổi
     console.log('(changeChoose) END')
 }
@@ -182,7 +184,7 @@ function dcQuantity(index) {
     }
     updateCart(cart);
     totalPriceF(cart);
-    document.getElementById('header').innerHTML = headerWrapper;
+    updateCartCount(cart)
     renderCart();
 }
 function icQuantity(index) {
@@ -190,11 +192,21 @@ function icQuantity(index) {
     item.quantity++;
     updateCart(cart);
     totalPriceF(cart);
-    document.getElementById('header').innerHTML = headerWrapper;
+    updateCartCount(cart)
     renderCart();
 }
 
-// Lần đầu tiên load giỏ hàng từ Local Storage và render
-loadCart(); // Gọi hàm này khi ứng dụng khởi động
-totalPriceF(cart);
-renderCart();
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById('header').innerHTML = headerWrapper;
+    document.getElementById('footer').innerHTML = footer;
+    
+    // Lần đầu tiên load giỏ hàng từ Local Storage và render
+    loadCart(); // Gọi hàm này khi ứng dụng khởi động
+    totalPriceF(cart);
+    renderCart();
+    
+    // Gọi `updateCartCount` sau khi nội dung được render
+    updateCartCount(cart); 
+});
