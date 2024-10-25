@@ -108,7 +108,7 @@ export function loadCart() {
 
 // update cart vào local storage
 export function updateCart(cart) {
-    localStorage.setItem('cart', JSON.stringify(cart)); // Lưu giỏ hàng vào localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
     console.log('(updateCart) cart: ', cart);
 }
 
@@ -125,12 +125,12 @@ function changeChoose(index) {
     console.log('(changeChoose) BEGIN:')
     let item = cart[index];
     if (item) {
-        item.choose = !item.choose;  // Đảo trạng thái
+        item.choose = !item.choose;
     }
-    updateCart(cart); // Cập nhật giỏ hàng sau khi thay đổi
-    totalPriceF(cart); // Tính lại tổng giá
+    updateCart(cart);
+    totalPriceF(cart);
     updateCartCount(cart)
-    renderCart(); // Render lại giỏ hàng sau khi thay đổi
+    renderCart();
     console.log('(changeChoose) END')
 }
 
@@ -140,10 +140,9 @@ export function removeItemFromCart(index) {
     // Xóa sản phẩm khỏi giỏ hàng
     cart.splice(index, 1);
     
-    // Tính lại tổng giá
     totalPriceF(cart);
-    updateCart(cart); // Cập nhật giỏ hàng sau khi xóa
-    // Render lại giỏ hàng sau khi xoá
+    updateCart(cart);
+    updateCartCount(cart)
     renderCart();
     console.log('(removeItemFormCart) END')
 }
@@ -202,11 +201,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('header').innerHTML = headerWrapper;
     document.getElementById('footer').innerHTML = footer;
     
-    // Lần đầu tiên load giỏ hàng từ Local Storage và render
-    loadCart(); // Gọi hàm này khi ứng dụng khởi động
+    loadCart();
     totalPriceF(cart);
     renderCart();
     
-    // Gọi `updateCartCount` sau khi nội dung được render
     updateCartCount(cart); 
 });

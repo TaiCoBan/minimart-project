@@ -2069,3 +2069,14 @@ h3 {
   background-color: #fb730f;
   border: 1px solid #fb730f;
 }
+#notification {
+  display: none;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 1000;
+}

@@ -80,12 +80,24 @@ const mainContent = `
             </div>
         </div>
     </div>
+    <div id="notification"></div>
 `;
 
 export function updateCartCount(cart) {
     const cartQuantityElement = document.getElementById('cart-quantity');
-    cartQuantityElement.textContent = cart.length; // Hiển thị số lượng hiện tại của giỏ hàng
+    cartQuantityElement.textContent = cart.length;
     console.log('(updateCartCount) cartCount: ', cart.length)
+}
+
+function showNotification(message) {
+    const notification = document.getElementById("notification");
+    notification.textContent = message;
+    notification.style.display = "block"; // Hiện thông báo
+    
+    // Ẩn thông báo sau 2 giây
+    setTimeout(() => {
+        notification.style.display = "none";
+    }, 4000);
 }
 
 function addToCart(index) {
@@ -94,17 +106,19 @@ function addToCart(index) {
 
     const existingItem = cart.find(item => item.name === product.name);
     if (existingItem) {
-        existingItem.quantity += 1;  // Tăng số lượng
+        existingItem.quantity += 1;
         console.log(`increase quantity ${existingItem.name}: ${existingItem.quantity}`);
+        showNotification(`Tăng số lượng ${existingItem.name} trong giỏ hàng.`);
     } else {
         cart.push({ 
             name: product.name, 
             price: product.price, 
             quantity: 1, 
             image: product.image,
-            choose: true  // Chọn mặc định khi thêm sản phẩm
+            choose: true
         });
         console.log(`new product: ${product.name}`);
+        showNotification(`${product.name} đã được thêm vào giỏ hàng.`);
     }
     
     updateCart(cart);
@@ -122,6 +136,7 @@ function addAddToCartEventListeners() {
     });
 }
 
+// đảm bảo rằng tất cả các phần tử trong DOM đã tải xong trước khi thực hiện các thao tác như cập nhật nội dung HTML và gán sự kiện
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('header').innerHTML = headerWrapper;
     document.getElementById('footer').innerHTML = footer;
