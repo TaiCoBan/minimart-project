@@ -58,7 +58,7 @@ export function renderCart() {
     const mainContent = `
         <div class="container">
             <div class="cart-content" style="margin-top: 30px; margin-bottom:30px">
-                <div class="title-header mb20">
+                <div class="title-header" style="margin-cottom: 20px">
                     <h2 class="title">Giỏ Hàng</h2>
                     <p><span class="text-blue">${cart.length}</span> sản phẩm trong giỏ hàng của bạn</p>
                 </div>

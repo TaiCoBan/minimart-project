@@ -25,7 +25,7 @@ const pageHeader = `
 `;
 const receiptInfo = `
     <h2 class="title">Đơn hàng</h3>
-    <div class="receipt-infor">
+    <div class="receipt-infor" >
         <table class="table table-hover">
             <thead class="thead-light">
                 <tr>
@@ -158,9 +158,7 @@ function showReceiptDetails(orderId) {
 
         mainContent.innerHTML = receiptDetailsHTML;
 
-        document.getElementById('back').onclick = function () {
-            mainContentHandler(2); // Quay lại danh sách đơn hàng
-        };
+        addBackToRecepitsEventListeners()
     } else {
         mainContent.innerHTML = "Không tìm thấy đơn hàng.";
     }
@@ -177,7 +175,14 @@ function addReceiptDetailEventListeners() {
         });
     });
 }
-
+function addBackToRecepitsEventListeners() {
+    document.getElementById('back').addEventListener('click', () => {
+        const mainContent = document.getElementById('main-content');
+        mainContent.innerHTML = receiptInfo; // Trở lại danh sách đơn hàng
+        addReceiptDetailEventListeners(); // Gắn lại sự kiện chi tiết đơn hàng
+    });
+    
+}
 
 document.addEventListener("DOMContentLoaded", () => {
     const wholePageElement = document.getElementById('whole-page');

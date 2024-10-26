@@ -21,7 +21,7 @@ const subNav = `
             <ul>
                 <li><a href="profile.html" class="title hidden-xs">Tài khoản</a></li>
                 <li class="hidden-xs">|</li>
-                <li><a href="login-form.html" class="title hidden-xs">Đăng nhập</a></li>
+                <li><a href="receipts.html" class="title hidden-xs">Đơn hàng</a></li>
                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                 <li><a href="cart.html" class="title"><i class="fa fa-shopping-cart"></i> <sup
                             class="cart-quantity" id="cart-quantity"></sup></a>
