@@ -89,7 +89,7 @@ export function updateCartCount(cart) {
     console.log('(updateCartCount) cartCount: ', cart.length)
 }
 
-function showNotification(message) {
+export function showNotification(message) {
     const notification = document.getElementById("notification");
     notification.textContent = message;
     notification.style.display = "block"; // Hiện thông báo
@@ -101,7 +101,7 @@ function showNotification(message) {
 }
 
 function addToCart(index) {
-    console.log('(addToCart) BEGIN: ')
+    console.log('(addToCart) BEGIN:----------------------------------------')
     const product = products[index];
 
     const existingItem = cart.find(item => item.name === product.name);
@@ -126,7 +126,7 @@ function addToCart(index) {
     updateCartCount(cart)
     console.log('(addToCart) product: ', product)
     console.log("(addToCart) cart:", cart);
-    console.log('(addToCart) END ')
+    console.log('(addToCart) END:----------------------------------------')
 }
 
 

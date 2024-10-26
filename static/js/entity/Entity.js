@@ -39,21 +39,25 @@ export class ProductItem {
     getTotalPrice() {
         return this.price * this.quantity
     }
+
+    getChoose() {
+        return this.choose
+    }
 }
 
 export class Receipt {
-    constructor(id, cusName, number, address,  productItems = []) {
+    constructor(id, cusName, number, address, date, productItems = []) {
         this.id = id
         this.cusName = cusName;
         this.number = number
         this.address = address
         this.products = productItems;
-        this.date = '01-01-2011';
+        this.date = date
         this.status = 0;
     }
 
     getCusName() {
-        return this.cusName
+        return 'Khách Hàng'
     }
 
     getNumber() {
@@ -68,7 +72,9 @@ export class Receipt {
         return this.products;
     }
 
-    totalPrice() {
-        return this.products.reduce((total, productItem) => total + productItem.getPrice(), 0);
-    }
+    
+}
+
+export function getTotalPrice(receipt) {
+    return receipt.products.reduce((total, productItem) => total + productItem.price, 0);
 }

@@ -2072,7 +2072,7 @@ h3 {
 #notification {
   display: none;
   position: fixed;
-  top: 20px;
+  top: 100px;
   right: 20px;
   background-color: #4CAF50;
   color: white;

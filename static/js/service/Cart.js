@@ -1,13 +1,13 @@
+import { products } from "../data/data.js";
+import { Receipt } from "../entity/Entity.js";
 import { headerWrapper, footer } from "./CommonElement.js";
-import { updateCartCount } from "./ProductList.js"
+import { updateCartCount, showNotification } from "./ProductList.js"
 
-document.getElementById('header').innerHTML = headerWrapper;
-document.getElementById('footer').innerHTML = footer;
-
+export let receipts = JSON.parse(localStorage.getItem('receipts')) || []
 export let cart = JSON.parse(localStorage.getItem('cart')) || [];
-console.log('(1)', localStorage.getItem('cart'))
+// console.log('(1) cart: ', localStorage.getItem('cart'))
 export let totalPrice = 0;
-
+let rID = JSON.parse(localStorage.getItem('rID')) || 0;
 function createCartItem(cartItem, index) {
     return `
         <tr>
@@ -86,11 +86,13 @@ export function renderCart() {
                                 <span class="prices-value prices-final text-red">${totalPrice.toLocaleString()}đ</span>
                             </div>
                         </div>
-                        <a href="checkout.html" class="btn-default btn-checkout">Mua Hàng</a>
+                        <a id="buy-now" class="btn-default btn-checkout" style="cursor: pointer;">Mua Hàng</a>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <div id="notification"></div>
     `;
     
     document.getElementById('main-content').innerHTML = mainContent;
@@ -99,13 +101,22 @@ export function renderCart() {
     addTrashEventListeners();
 }
 
+export function loadReceipts() {
+    const storedReceipts = localStorage.getItem('receipts')
+    receipts = storedReceipts ? JSON.parse(storedReceipts) : []
+    console.log('(loadReceipts) receipts: ', receipts)
+}
+export function updateReceipts(receipts) {
+    localStorage.setItem('receipts', JSON.stringify(receipts));
+    console.log('(updateReceipts) receipts: ', receipts);
+}
+
 // Lấy cart từ local storage
 export function loadCart() {
     const storedCart = localStorage.getItem('cart');
     cart = storedCart ? JSON.parse(storedCart) : [];
     console.log("(loadCart) cart:", cart);
 }
-
 // update cart vào local storage
 export function updateCart(cart) {
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -134,7 +145,6 @@ function changeChoose(index) {
     console.log('(changeChoose) END')
 }
 
-// D
 export function removeItemFromCart(index) {
     console.log('(removeItemFromCart) BEGIN:')
     // Xóa sản phẩm khỏi giỏ hàng
@@ -147,7 +157,43 @@ export function removeItemFromCart(index) {
     console.log('(removeItemFormCart) END')
 }
 
+function buyNow(cart, receipts) {
+    console.log('(buyNow) BEGIN::----------------------------------------')
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleString('vi-VN', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+    });
+    let receipt = new Receipt('DH' + rID, 'Khách Hàng', '123 456 7890', 'Số 3 đường Cầu Giấy, phường Láng Thượng, quận Đống Đa, thành phố Hà Nội', formattedDate);
+    cart = cart.filter((item) => {
+        if (item.choose) {
+            receipt.getProducts().push(item);
+            return false;  // Loại bỏ item khỏi cart sau khi thêm vào hóa đơn
+        }
+        return true; // Giữ item trong cart nếu chưa chọn
+    });
+    
+    receipts.unshift(receipt); // Thêm hóa đơn vào danh sách receipts
+    updateCart(cart);  // Cập nhật lại giỏ hàng sau khi mua
+    totalPriceF(cart); // Tính lại tổng giá
+    updateCartCount(cart); // Cập nhật số lượng giỏ hàng
 
+    updateReceipts(receipts)
+    loadCart()
+    renderCart()
+    showNotification("Tạo đơn hàng thành công")
+    rID++
+    localStorage.setItem('rID', JSON.stringify(rID))
+    console.log('(buyNow) END:----------------------------------------')
+}
+
+function addBuyNowEventListeners() {
+    document.getElementById('buy-now').addEventListener('click', () => buyNow(cart, receipts));
+}
 function addCheckboxEventListeners() {
     cart.forEach((item, index) => {
         document.getElementById(`choose-${index}`).addEventListener('click', () => changeChoose(index));
@@ -196,14 +242,19 @@ function icQuantity(index) {
 }
 
 
-
-document.addEventListener("DOMContentLoaded", () => {
+function loadPage(cart) {
+    document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('header').innerHTML = headerWrapper;
     document.getElementById('footer').innerHTML = footer;
     
+    loadReceipts()
     loadCart();
     totalPriceF(cart);
     renderCart();
     
+    addBuyNowEventListeners()
     updateCartCount(cart); 
-});
+    });
+}
+
+loadPage(cart)
