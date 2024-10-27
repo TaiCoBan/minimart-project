@@ -1,11 +1,13 @@
 import { headerWrapper, footer } from "./CommonElement.js";
-import { loadCart, totalPriceF, renderCart, loadReceipts } from "./Cart.js";
-import { updateCartCount } from "./ProductList.js";
+import { loadCart, totalPriceF, renderCart, loadReceipts, updateReceipts } from "./Cart.js";
+import { showNotification, updateCartCount } from "./ProductList.js";
 import { getTotalPrice } from "../entity/Entity.js";
 
 export let receipts = JSON.parse(localStorage.getItem('receipts')) || [];
 console.log('(1) receipts: ', receipts);
 export let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+
 
 const pageHeader = `
     <div class="page-header">
@@ -59,11 +61,15 @@ const content = `
         </div>
     </div>
 `;
+const noti = `
+
+`
 const wholePage = `
     ${headerWrapper}
     ${pageHeader}
     ${content}
     ${footer}
+    <div id="notification"></div>
 `;
 function receiptInfoMap(receipts) {
     return receipts.map(receipt => `
@@ -72,7 +78,7 @@ function receiptInfoMap(receipts) {
             <td>${receipt.cusName}</td>
             <td>${receipt.date}</td>
             <td><a class="details" data-id="${receipt.id}" id="show-receipt-details" style="cursor: pointer;">Xem chi tiết</a></td>
-            <td>${receipt.status === 0 ? 'Chờ xử lý' : 'Đã hoàn thành'}</td>
+            <td>${receipt.status === 0 ? 'Đã hủy' : (receipt.status === 1 ? 'Hoàn thành' : 'Đang xử lý')}</td>
         </tr>
     `).join('');
 }
@@ -97,12 +103,11 @@ function showReceiptDetails(orderId) {
     const receipt = receipts.find(r => r.id === orderId);
     const mainContent = document.getElementById('main-content');
 
-    console.log('Đơn hàng tìm thấy: ', receipt); // Ghi log đơn hàng tìm thấy
+    console.log('Đơn hàng tìm thấy: ', receipt);
 
     if (receipt) {
-        // Hiển thị chi tiết đơn hàng
         const receiptDetailsHTML = `
-            <h2 class="title">Đơn hàng / Chi tiết đơn hàng</h3>
+            <h2 class="title">Đơn hàng / Chi tiết đơn hàng</h2>
             <div class="receipt-infor-details">
                 <div class="title-receipt">
                     <div class="left-content content">
@@ -150,6 +155,8 @@ function showReceiptDetails(orderId) {
                         </tr>
                     </tfoot>
                 </table>
+                <a id="cancle" class="btn-default btn-checkout receipt-status-btn" data-id="${receipt.id}" style="background-color: red;">Hủy</a>
+                <a id="complete" class="btn-default btn-checkout receipt-status-btn" data-id="${receipt.id}">Hoàn thành</a>
                 <a id="back" class="redirect-to-receipt text-blue" style="cursor:pointer">
                     <i class="fas fa-long-arrow-alt-left"></i> Danh sách đơn hàng
                 </a>
@@ -158,13 +165,59 @@ function showReceiptDetails(orderId) {
 
         mainContent.innerHTML = receiptDetailsHTML;
 
-        addBackToRecepitsEventListeners()
+        // Gắn sự kiện
+        addBackToRecepitsEventListeners();
+        addCancleReceiptEventListeners(receipt);
+        addCompleteReceiptEventListeners(receipt);
     } else {
         mainContent.innerHTML = "Không tìm thấy đơn hàng.";
     }
 }
+function renderReceiptInfo() {
+    const tableBody = document.querySelector('.receipt-infor tbody');
+    if (tableBody) {
+        tableBody.innerHTML = receiptInfoMap(receipts);
+        addReceiptDetailEventListeners();
+    }
+}
 
 
+
+function addCancleReceiptEventListeners() {
+    const cancelButton = document.getElementById('cancle');
+    cancelButton.addEventListener('click', () => {
+        const id = cancelButton.getAttribute('data-id');
+        console.log('id: ', id)
+        const receipt = receipts.find(r => r.id === id);
+        console.log('receipt: ', receipt)
+
+        if (receipt) {
+            receipt.status = 0;
+            updateReceipts(receipts);
+            showNotification('Hủy đơn hàng ' + id);
+            loadPage()
+        } else {
+            console.error('Đơn hàng không tồn tại');
+        }
+    });
+}
+function addCompleteReceiptEventListeners() {
+    const completeButton = document.getElementById('complete');
+    completeButton.addEventListener('click', () => {
+        const id = completeButton.getAttribute('data-id');
+        const receipt = receipts.find(r => r.id === id);
+
+        if (receipt) {
+            receipt.status = 1;
+            updateReceipts(receipts);
+            loadCart();
+            showNotification('Hoàn thành đơn hàng ' + id);
+            loadPage()
+        } else {
+            console.error('Đơn hàng không tồn tại');
+        }
+    });
+}
 function addReceiptDetailEventListeners() {
     const detailLinks = document.querySelectorAll('.details');
     detailLinks.forEach(link => {
@@ -175,30 +228,46 @@ function addReceiptDetailEventListeners() {
         });
     });
 }
+// function addBackToRecepitsEventListeners() {
+//     // document.getElementById('back').addEventListener('click', () => {
+//     //     const mainContent = document.getElementById('main-content');
+//     //     mainContent.innerHTML = receiptInfo; // Trở lại danh sách đơn hàng
+//     //     updateReceipts(receipts)
+//     //     addReceiptDetailEventListeners(); // Gắn lại sự kiện chi tiết đơn hàng
+//     // });
+//     loadPage(cart, receipts)
+// }
 function addBackToRecepitsEventListeners() {
     document.getElementById('back').addEventListener('click', () => {
         const mainContent = document.getElementById('main-content');
         mainContent.innerHTML = receiptInfo; // Trở lại danh sách đơn hàng
-        addReceiptDetailEventListeners(); // Gắn lại sự kiện chi tiết đơn hàng
+        renderReceiptInfo(); // Gọi lại hàm renderReceiptInfo để hiển thị danh sách
     });
-    
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    const wholePageElement = document.getElementById('whole-page');
-    if (wholePageElement) {
-        wholePageElement.innerHTML = wholePage;
 
-        // Gán nội dung cho mainContent sau khi wholePage đã được render
-        const mainContent = document.getElementById('main-content');
-        if (mainContent) {
-            mainContent.innerHTML = receiptInfo;
 
-            addReceiptDetailEventListeners();
+function loadPage(cart, receipts) {
+    document.addEventListener("DOMContentLoaded", () => {
+        const wholePageElement = document.getElementById('whole-page');
+        if (wholePageElement) {
+            wholePageElement.innerHTML = wholePage;
+    
+            const mainContent = document.getElementById('main-content');
+            if (mainContent) {
+                mainContent.innerHTML = receiptInfo;
+    
+                addReceiptDetailEventListeners();
+            }
         }
-    }
+    
+        loadReceipts();
+        updateReceipts(receipts)
+        loadCart();
+        updateCartCount(cart);
+    
+        renderReceiptInfo();
+    });
+}
 
-    loadReceipts();
-    loadCart();
-    updateCartCount(cart);
-});
+loadPage(cart, receipts)

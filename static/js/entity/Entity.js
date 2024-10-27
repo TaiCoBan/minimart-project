@@ -53,7 +53,7 @@ export class Receipt {
         this.address = address
         this.products = productItems;
         this.date = date
-        this.status = 0;
+        this.status = 2; // 0: Hủy - 1: Hoàn thành - 2: Đang xử lí
     }
 
     getCusName() {

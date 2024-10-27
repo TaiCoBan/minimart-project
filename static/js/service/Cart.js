@@ -158,7 +158,7 @@ export function removeItemFromCart(index) {
 }
 
 function buyNow(cart, receipts) {
-    console.log('(buyNow) BEGIN::----------------------------------------')
+    console.log('(buyNow) BEGIN::----------------------------------------');
     const currentDate = new Date();
     const formattedDate = currentDate.toLocaleString('vi-VN', {
         day: '2-digit',
@@ -168,28 +168,37 @@ function buyNow(cart, receipts) {
         minute: '2-digit',
         second: '2-digit'
     });
-    let receipt = new Receipt('DH' + rID, 'Khách Hàng', '123 456 7890', 'Số 3 đường Cầu Giấy, phường Láng Thượng, quận Đống Đa, thành phố Hà Nội', formattedDate);
+
+    // Duyệt qua từng item trong cart, nếu được chọn thì tạo hóa đơn riêng
     cart = cart.filter((item) => {
         if (item.choose) {
-            receipt.getProducts().push(item);
-            return false;  // Loại bỏ item khỏi cart sau khi thêm vào hóa đơn
+            let receipt = new Receipt(
+                'DH' + rID, 
+                'Khách Hàng', 
+                '123 456 7890', 
+                'Số 3 đường Cầu Giấy, phường Láng Thượng, quận Đống Đa, thành phố Hà Nội', 
+                formattedDate,
+                [item]  // Đặt item vào mảng products của Receipt
+            );
+            
+            receipts.unshift(receipt); // Thêm hóa đơn vào danh sách receipts
+            rID++; // Tăng ID cho hóa đơn tiếp theo
+            return false; // Loại bỏ item khỏi cart sau khi thêm vào hóa đơn
         }
         return true; // Giữ item trong cart nếu chưa chọn
     });
-    
-    receipts.unshift(receipt); // Thêm hóa đơn vào danh sách receipts
+
     updateCart(cart);  // Cập nhật lại giỏ hàng sau khi mua
     totalPriceF(cart); // Tính lại tổng giá
     updateCartCount(cart); // Cập nhật số lượng giỏ hàng
-
-    updateReceipts(receipts)
-    loadCart()
-    renderCart()
-    showNotification("Tạo đơn hàng thành công")
-    rID++
-    localStorage.setItem('rID', JSON.stringify(rID))
-    console.log('(buyNow) END:----------------------------------------')
+    updateReceipts(receipts); // Lưu receipts vào localStorage
+    loadCart();
+    renderCart();
+    showNotification("Tạo đơn hàng thành công");
+    localStorage.setItem('rID', JSON.stringify(rID)); // Lưu lại ID cho lần tiếp theo
+    console.log('(buyNow) END:----------------------------------------');
 }
+
 
 function addBuyNowEventListeners() {
     document.getElementById('buy-now').addEventListener('click', () => buyNow(cart, receipts));

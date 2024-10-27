@@ -38,7 +38,7 @@ const navigation = `
                     <!-- navigations-->
                     <div id="navigation">
                         <ul>
-                            <li class="active"><a href="#">Trang chủ</a></li>
+                            <li class="active"><a href="product-list.html">Trang chủ</a></li>
                             <li><a href="product-list.html">Sản phẩm</a>
                             </li>
                             <li><a href="#">Thông tin</a>
