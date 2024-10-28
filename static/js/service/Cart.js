@@ -97,8 +97,8 @@ export function renderCart() {
     `;
 
     document.getElementById('main-content-cart').innerHTML = mainContent;
-    addQuantityEventListeners(); // Gắn sự kiện tăng/giảm số lượng
-    addCheckboxEventListeners(); // Gắn sự kiện cho checkbox
+    addQuantityEventListeners();
+    addCheckboxEventListeners();
     addTrashEventListeners();
 }
 
@@ -112,6 +112,7 @@ export function updateReceipts(receipts) {
     console.log('(updateReceipts) receipts: ', receipts);
 }
 
+
 // Lấy cart từ local storage
 export function loadCart() {
     const storedCart = localStorage.getItem('cart');
@@ -123,7 +124,6 @@ export function updateCart(cart) {
     localStorage.setItem('cart', JSON.stringify(cart));
     console.log('(updateCart) cart: ', cart);
 }
-
 export function totalPriceF(cart) {
     totalPrice = 0;
     cart.forEach(item => {
@@ -146,7 +146,6 @@ function changeChoose(index) {
     addBuyNowEventListeners()
     console.log('(changeChoose) END')
 }
-
 export function removeItemFromCart(index) {
     console.log('(removeItemFromCart) BEGIN:')
     cart.splice(index, 1);
@@ -170,42 +169,39 @@ function buyNow(cart, receipts) {
         second: '2-digit'
     });
 
-    // Duyệt qua từng item trong cart, nếu được chọn thì tạo hóa đơn riêng
-    cart = cart.filter((item) => {
-        if (item.choose) {
-            let receipt = new Receipt(
-                'DH' + rID, 
-                'Khách Hàng', 
-                '123 456 7890', 
-                'Số 3 đường Cầu Giấy, phường Láng Thượng, quận Đống Đa, thành phố Hà Nội', 
-                formattedDate,
-                [item]  // Đặt item vào mảng products của Receipt
-            );
-            
-            receipts.unshift(receipt); // Thêm hóa đơn vào danh sách receipts
-            rID++; // Tăng ID cho hóa đơn tiếp theo
-            return false; // Loại bỏ item khỏi cart sau khi thêm vào hóa đơn
-        }
-        return true; // Giữ item trong cart nếu chưa chọn
-    });
+    const selectedItems = cart.filter((item) => item.choose);
 
-    updateCart(cart);  // Cập nhật lại giỏ hàng sau khi mua
-    totalPriceF(cart); // Tính lại tổng giá
-    updateCartCount(cart); // Cập nhật số lượng giỏ hàng
-    updateReceipts(receipts); // Lưu receipts vào localStorage
-    showNotification("Tạo đơn hàng thành công");
-    localStorage.setItem('rID', JSON.stringify(rID)); // Lưu lại ID cho lần tiếp theo
+    if (selectedItems.length > 0) {
+        let receipt = new Receipt(
+            'DH' + rID,
+            'Khách Hàng',
+            '0366175859',
+            'Số 3 đường Cầu Giấy, phường Láng Thượng, quận Đống Đa, thành phố Hà Nội',
+            formattedDate,
+            selectedItems
+        );
 
-    // Tải lại trang sau 1 giây
-    setTimeout(() => {
-        location.reload();
-    }, 1000);
+        receipts.unshift(receipt);
+        rID++;
+
+        cart = cart.filter((item) => !item.choose);
+
+        updateCart(cart);
+        totalPriceF(cart);
+        updateCartCount(cart);
+        updateReceipts(receipts);
+        showNotification("Tạo đơn hàng thành công");
+        localStorage.setItem('rID', JSON.stringify(rID));
+
+        setTimeout(() => {
+            location.reload();
+        }, 1000);
+    } else {
+        showNotification('Vui lòng chọn sản phẩm')
+    }
 
     console.log('(buyNow) END:----------------------------------------');
 }
-
-
-
 function addBuyNowEventListeners() {
     document.getElementById('buy-now').addEventListener('click', () => buyNow(cart, receipts));
 }
@@ -246,6 +242,7 @@ function dcQuantity(index) {
     totalPriceF(cart);
     updateCartCount(cart)
     renderCart();
+    addBuyNowEventListeners()
 }
 function icQuantity(index) {
     let item = cart[index];
@@ -254,6 +251,7 @@ function icQuantity(index) {
     totalPriceF(cart);
     updateCartCount(cart)
     renderCart();
+    addBuyNowEventListeners()
 }
 
 

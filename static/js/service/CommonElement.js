@@ -1,4 +1,5 @@
-export let user = JSON.parse(localStorage.getItem('user'));
+export let cart = JSON.parse(localStorage.getItem('cart')) || [];
+console.log('(1) cart: ', cart)
 
 // Header
 const logo = `
@@ -21,30 +22,17 @@ const subNav = `
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
         <div class="account-section">
             <ul>
-                <li><a id="account" style="cursor: pointer;" class="title hidden-xs">Tài khoản</a></li>
+                <li><a href="login-form.html" class="title hidden-xs">Tài khoản</a></li>
                 <li class="hidden-xs">|</li>
                 <li><a href="receipts.html" class="title hidden-xs">Đơn hàng</a></li>
                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                 <li><a href="cart.html" class="title"><i class="fa fa-shopping-cart"></i> <sup
-                            class="cart-quantity" id="cart-quantity"></sup></a>
+                            class="cart-quantity" id="cart-quantity">${cart.length}</sup></a>
                 </li>
             </ul>
         </div>
     </div>
 `
-document.addEventListener("DOMContentLoaded", function() {
-    const account = document.getElementById('account')
-    if (user) {
-        account.addEventListener('click', () => {
-            window.location.href="profile.html"
-        })
-    } else {
-        account.addEventListener('click', () => {
-            window.location.href="login-form.html"
-        })
-    }
-    
-});
 
 const navigation = `
     <div class="navigation">

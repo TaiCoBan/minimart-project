@@ -27,7 +27,7 @@ const pageHeader = `
 `;
 const receiptInfo = `
     <h2 class="title">Đơn hàng</h3>
-    <div class="receipt-infor" >
+    <div class="receipt-infor" style="overflow-y: auto;">
         <table class="table table-hover">
             <thead class="thead-light">
                 <tr>
@@ -71,6 +71,7 @@ const wholePage = `
     ${footer}
     <div id="notification"></div>
 `;
+
 function receiptInfoMap(receipts) {
     return receipts.map(receipt => `
         <tr>
@@ -165,7 +166,6 @@ function showReceiptDetails(orderId) {
 
         mainContent.innerHTML = receiptDetailsHTML;
 
-        // Gắn sự kiện
         addBackToRecepitsEventListeners();
         addCancleReceiptEventListeners(receipt);
         addCompleteReceiptEventListeners(receipt);
@@ -227,25 +227,25 @@ function addReceiptDetailEventListeners() {
     detailLinks.forEach(link => {
         link.addEventListener('click', event => {
             event.preventDefault();
-            const orderId = link.getAttribute('data-id'); // Lấy orderId từ data-id
-            showReceiptDetails(orderId); // Gọi hàm để hiển thị chi tiết đơn hàng
+            const orderId = link.getAttribute('data-id');
+            showReceiptDetails(orderId);
         });
     });
 }
 // function addBackToRecepitsEventListeners() {
 //     // document.getElementById('back').addEventListener('click', () => {
 //     //     const mainContent = document.getElementById('main-content');
-//     //     mainContent.innerHTML = receiptInfo; // Trở lại danh sách đơn hàng
+//     //     mainContent.innerHTML = receiptInfo;
 //     //     updateReceipts(receipts)
-//     //     addReceiptDetailEventListeners(); // Gắn lại sự kiện chi tiết đơn hàng
+//     //     addReceiptDetailEventListeners();
 //     // });
 //     loadPage(cart, receipts)
 // }
 function addBackToRecepitsEventListeners() {
     document.getElementById('back').addEventListener('click', () => {
         const mainContent = document.getElementById('main-content');
-        mainContent.innerHTML = receiptInfo; // Trở lại danh sách đơn hàng
-        renderReceiptInfo(); // Gọi lại hàm renderReceiptInfo để hiển thị danh sách
+        mainContent.innerHTML = receiptInfo;
+        renderReceiptInfo();
     });
 }
 

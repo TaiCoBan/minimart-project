@@ -88,13 +88,12 @@ export function updateCartCount(cart) {
     cartQuantityElement.textContent = cart.length;
     console.log('(updateCartCount) cartCount: ', cart.length)
 }
-
 export function showNotification(message) {
     const notification = document.getElementById("notification");
     notification.textContent = message;
-    notification.style.display = "block"; // Hiện thông báo
+    notification.style.display = "block"; // hiện thông báo
     
-    // Ẩn thông báo sau 2 giây
+    // Ẩn thông báo sau 3 giây
     setTimeout(() => {
         notification.style.display = "none";
     }, 3000);
@@ -128,15 +127,13 @@ function addToCart(index) {
     console.log("(addToCart) cart:", cart);
     console.log('(addToCart) END:----------------------------------------')
 }
-
-
 function addAddToCartEventListeners() {
     products.forEach((_, index) => {
         document.getElementById(`add-to-cart-${index}`).addEventListener('click', () => addToCart(index));
     });
 }
 
-// đảm bảo rằng tất cả các phần tử trong DOM đã tải xong trước khi thực hiện các thao tác như cập nhật nội dung HTML và gán sự kiện
+// đảm bảo tất cả các phần tử trong DOM đã tải xong trước khi thực hiện các thao tác như cập nhật nội dung HTML và gán sự kiện
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('header').innerHTML = headerWrapper;
     // if (headerWrapper) console.log('ton tai header')
