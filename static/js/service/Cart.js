@@ -8,6 +8,7 @@ export let cart = JSON.parse(localStorage.getItem('cart')) || [];
 // console.log('(1) cart: ', localStorage.getItem('cart'))
 export let totalPrice = 0;
 let rID = JSON.parse(localStorage.getItem('rID')) || 0;
+
 function createCartItem(cartItem, index) {
     return `
         <tr>
@@ -94,8 +95,8 @@ export function renderCart() {
         
         <div id="notification"></div>
     `;
-    
-    document.getElementById('main-content').innerHTML = mainContent;
+
+    document.getElementById('main-content-cart').innerHTML = mainContent;
     addQuantityEventListeners(); // Gắn sự kiện tăng/giảm số lượng
     addCheckboxEventListeners(); // Gắn sự kiện cho checkbox
     addTrashEventListeners();
@@ -142,21 +143,21 @@ function changeChoose(index) {
     totalPriceF(cart);
     updateCartCount(cart)
     renderCart();
+    addBuyNowEventListeners()
     console.log('(changeChoose) END')
 }
 
 export function removeItemFromCart(index) {
     console.log('(removeItemFromCart) BEGIN:')
-    // Xóa sản phẩm khỏi giỏ hàng
     cart.splice(index, 1);
     
     totalPriceF(cart);
     updateCart(cart);
     updateCartCount(cart)
     renderCart();
+    addBuyNowEventListeners()
     console.log('(removeItemFormCart) END')
 }
-
 function buyNow(cart, receipts) {
     console.log('(buyNow) BEGIN::----------------------------------------');
     const currentDate = new Date();
@@ -192,12 +193,17 @@ function buyNow(cart, receipts) {
     totalPriceF(cart); // Tính lại tổng giá
     updateCartCount(cart); // Cập nhật số lượng giỏ hàng
     updateReceipts(receipts); // Lưu receipts vào localStorage
-    loadCart();
-    renderCart();
     showNotification("Tạo đơn hàng thành công");
     localStorage.setItem('rID', JSON.stringify(rID)); // Lưu lại ID cho lần tiếp theo
+
+    // Tải lại trang sau 1 giây
+    setTimeout(() => {
+        location.reload();
+    }, 1000);
+
     console.log('(buyNow) END:----------------------------------------');
 }
+
 
 
 function addBuyNowEventListeners() {
@@ -253,17 +259,17 @@ function icQuantity(index) {
 
 function loadPage(cart) {
     document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById('header').innerHTML = headerWrapper;
-    document.getElementById('footer').innerHTML = footer;
+        document.getElementById('header').innerHTML = headerWrapper;
+        document.getElementById('footer').innerHTML = footer;
     
-    loadReceipts()
-    loadCart();
-    totalPriceF(cart);
-    renderCart();
+        loadReceipts();
+        loadCart();
+        totalPriceF(cart);
+        renderCart();
     
-    addBuyNowEventListeners()
-    updateCartCount(cart); 
-    });
+        addBuyNowEventListeners();
+        updateCartCount(cart); 
+    });    
 }
 
 loadPage(cart)

@@ -195,7 +195,9 @@ function addCancleReceiptEventListeners() {
             receipt.status = 0;
             updateReceipts(receipts);
             showNotification('Hủy đơn hàng ' + id);
-            loadPage()
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
         } else {
             console.error('Đơn hàng không tồn tại');
         }
@@ -212,7 +214,9 @@ function addCompleteReceiptEventListeners() {
             updateReceipts(receipts);
             loadCart();
             showNotification('Hoàn thành đơn hàng ' + id);
-            loadPage()
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
         } else {
             console.error('Đơn hàng không tồn tại');
         }
@@ -249,7 +253,7 @@ function addBackToRecepitsEventListeners() {
 
 function loadPage(cart, receipts) {
     document.addEventListener("DOMContentLoaded", () => {
-        const wholePageElement = document.getElementById('whole-page');
+        const wholePageElement = document.getElementById('whole-page-receipts');
         if (wholePageElement) {
             wholePageElement.innerHTML = wholePage;
     

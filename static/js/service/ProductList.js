@@ -97,7 +97,7 @@ export function showNotification(message) {
     // Ẩn thông báo sau 2 giây
     setTimeout(() => {
         notification.style.display = "none";
-    }, 4000);
+    }, 3000);
 }
 
 function addToCart(index) {
@@ -139,22 +139,13 @@ function addAddToCartEventListeners() {
 // đảm bảo rằng tất cả các phần tử trong DOM đã tải xong trước khi thực hiện các thao tác như cập nhật nội dung HTML và gán sự kiện
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('header').innerHTML = headerWrapper;
+    // if (headerWrapper) console.log('ton tai header')
     document.getElementById('footer').innerHTML = footer;
-    document.getElementById('main-content').innerHTML = mainContent;
+    // if (footer) console.log('ton tai footer')
+    document.getElementById('main-content-products').innerHTML = mainContent;
+    // if (mainContent) console.log('ton tai main-content')
     
     // Gọi `updateCartCount` sau khi nội dung được render
     updateCartCount(cart); 
     addAddToCartEventListeners();
 });
-
-
-// document.getElementById('main-content').innerHTML = mainContent;
-// document.getElementById('header').innerHTML = headerWrapper;
-// document.getElementById('footer').innerHTML = footer;
-// addAddToCartEventListeners();
-
-
-// document.addEventListener("DOMContentLoaded", () => {
-//     document.getElementById('main-content').innerHTML = mainContent;
-//     addAddToCartEventListeners();  // Gán sự kiện sau khi nội dung được render
-// });

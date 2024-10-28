@@ -78,3 +78,13 @@ export class Receipt {
 export function getTotalPrice(receipt) {
     return receipt.products.reduce((total, productItem) => total + productItem.price, 0);
 }
+
+export class User {
+    constructor(name, number, email, password, address) {
+        this.name = name;
+        this.number = number
+        this.email = email
+        this.password = password
+        this.address = address
+    }
+}

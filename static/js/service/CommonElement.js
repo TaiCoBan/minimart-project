@@ -1,3 +1,5 @@
+export let user = JSON.parse(localStorage.getItem('user'));
+
 // Header
 const logo = `
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-8">
@@ -19,7 +21,7 @@ const subNav = `
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
         <div class="account-section">
             <ul>
-                <li><a href="profile.html" class="title hidden-xs">Tài khoản</a></li>
+                <li><a id="account" style="cursor: pointer;" class="title hidden-xs">Tài khoản</a></li>
                 <li class="hidden-xs">|</li>
                 <li><a href="receipts.html" class="title hidden-xs">Đơn hàng</a></li>
                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
@@ -30,6 +32,20 @@ const subNav = `
         </div>
     </div>
 `
+document.addEventListener("DOMContentLoaded", function() {
+    const account = document.getElementById('account')
+    if (user) {
+        account.addEventListener('click', () => {
+            window.location.href="profile.html"
+        })
+    } else {
+        account.addEventListener('click', () => {
+            window.location.href="login-form.html"
+        })
+    }
+    
+});
+
 const navigation = `
     <div class="navigation">
         <div class="container">
