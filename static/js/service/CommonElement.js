@@ -5,7 +5,7 @@ console.log('(1) cart: ', cart)
 const logo = `
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-8">
         <div class="logo">
-            <a href="product-list.html"><img src="../static/image/logo3.png" alt=""> </a>
+            <a href="product-list.html"><img src="../static/image/logo/logo3.png" alt=""> </a>
         </div>
     </div>
 `
