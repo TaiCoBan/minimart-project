@@ -4,8 +4,8 @@ console.log('(1) cart: ', cart)
 // Header
 const logo = `
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-8">
-        <div class="logo">
-            <a href="product-list.html"><img src="../static/image/logo/logo3.png" alt=""> </a>
+        <div class="logo" style="margin-left: 50px;">
+            <a href="product-list.html"><img src="../static/image/logo/logo2.png" alt=""> </a>
         </div>
     </div>
 `
