@@ -32,7 +32,7 @@ function createCartItem(cartItem, index) {
                 <div class="item-center">
                     <div class="quantity">
                         <input class="btn-quantity decrease-quantity" type="button" value="-">
-                        <input type="number" name="quantity" value="${cartItem.quantity}" class="quantity-input" id="quantity-input-${index}">
+                        <input type="number" name="quantity" value="${cartItem.quantity}" class="quantity-input" id="quantity-input-${index}" readonly>
                         <input class="btn-quantity increase-quantity" type="button" value="+">
                     </div>
                 </div>
